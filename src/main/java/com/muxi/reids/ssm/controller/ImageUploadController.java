@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-/*测试  github更新*/
+/*测试  github更新   测试*/
 @Controller
 @RequestMapping("writeBlog")
 public class ImageUploadController {

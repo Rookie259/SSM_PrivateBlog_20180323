@@ -1,0 +1,57 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.muxi.reids.ssm.dao.AddInformationInterfaces">
+
+    <sql id="userAs">
+         #{user}.uNickName,#{user}.uPassword,#{user}.uEamil, #{user}.uTime
+    </sql>
+
+    <sql id="userRegister">
+         #{uNickName},#{uPassword},#{uEamil},#{uTime}
+    </sql>
+
+    <sql id="blogComment">
+           #{btitle},#{bcontent},#{btime},#{blabel},#{bstate},#{buid},#{bclid}
+    </sql>
+    <sql id="commentKey">
+
+    </sql>
+    <sql id="commentValues">
+            #{cnickname},#{ctext},#{ctime},#{clike},#{cbid},#{ctargetid},#{cnote}
+    </sql>
+    <insert id="addUser" keyColumn="uid" keyProperty="uId" useGeneratedKeys="true">
+        INSERT into user(unickname,upassword,ueamil,utime) VALUES
+        (
+        <include refid="userRegister"></include>
+        )
+
+    </insert>
+    <!--插入预览状态博客-->
+    <insert id="addPreviewState" keyColumn="bid" keyProperty="bid" useGeneratedKeys="true">
+        INSERT INTO blog(btitle,bcontent,btime,blabel,bstate,buid,bclid)
+        VALUES
+        (   #{btitle},#{bcontent},#{btime},#{blabel},#{bstate},#{buid.uid},#{bclid.clid} )
+    </insert>
+    <!--添加当前ip点赞-->
+    <insert id="addBlogLike" keyColumn="lid" keyProperty="lid" useGeneratedKeys="true">
+         INSERT INTO likeblog(lip,lbid)
+         VALUES
+         (#{arg0},#{arg1})
+    </insert>
+    <!--添加心情记录-->
+    <insert id="addEssay" keyColumn="eid" keyProperty="eid" useGeneratedKeys="true">
+          insert into essay(ehobby,etime) values ( #{arg0},#{arg1} )
+    </insert>
+    <!--插入根评论-->
+    <insert id="addBaseComment" keyColumn="cid" keyProperty="cid" useGeneratedKeys="true">
+        insert into comment(cnickname,ctext,ctime,cbid) values
+        ( #{arg0},#{arg1},#{arg2},#{arg3})
+    </insert>
+    <!--插入子评论-->
+    <insert id="addDoubleDeckComment" keyColumn="cid" keyProperty="cid" useGeneratedKeys="true">
+        insert into comment(cnickname,ctext,ctime,clike,cbid,ctargetid,cnote,ccheckcomment) values
+        ( #{cnickname},#{ctext},#{ctime},#{clike},#{cbid.bid},#{ctargetid.cid},#{cnote},#{ccheckcomment})
+    </insert>
+</mapper>

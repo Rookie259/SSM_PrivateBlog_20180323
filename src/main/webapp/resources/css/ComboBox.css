@@ -1,0 +1,72 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+a, img {
+    border: 0;
+}
+
+body {
+    font: 12px/180% Arial, Helvetica, sans-serif, "新宋体";
+}
+
+/* diy_select */
+.diy_select {
+    height: 28px;
+    width: 210px;
+    position: relative;
+    font-size: 12px;
+    background: #fff;
+    color: #000;
+    float: left;
+    margin-top: 5px;
+}
+
+.diy_select_btn, .diy_select_txt {
+    float: left;
+    height: 100%;
+    line-height: 28px
+}
+
+.diy_select, .diy_select_list {
+    border: 1px solid #73839F;
+}
+
+.diy_select_txt {
+    width: 180px;
+}
+
+.diy_select_txt, .diy_select_list li {
+    text-indent: 10px;
+    overflow: hidden
+}
+
+
+.diy_select_list {
+    position: absolute;
+    top: 28px;
+    left: -1px;
+    z-index: 88888;
+    border-top: none;
+    width: 100%;
+    display: none;
+    _top: 29px;
+    height: 200px;
+    overflow-y:scroll;
+}
+
+.diy_select_list li {
+    list-style: none;
+    height: 25px;
+    line-height: 25px;
+    cursor: default;
+    background: #ECECEC;
+}
+
+.diy_select_list li.focus {
+    background: #3399FF;
+    color: #fff
+}

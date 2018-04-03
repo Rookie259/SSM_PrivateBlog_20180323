@@ -1,0 +1,199 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: #C9B5D4;
+}
+.box{
+    height: 100%;
+    width: 100%;
+}
+
+.left{
+    height: 99%;
+    width: 40%;
+    float: left;
+}
+.leftBox{
+    width: 100%;
+    height: 40%;
+    margin-top: 3%;
+}
+.leftBox img{
+    position:relative;left:50%;
+    margin-left:-100px;
+}
+.right{
+    height: 99%;
+    width: 30%;
+    float: left;
+    margin-left: 10%;
+}
+.rightBox{
+    width: 100%;
+    height: 70%;
+    margin-top: 15%;
+}
+.rightBoxUpTitle{
+    height: 80px;
+    width: 100%;
+    background: #363636;
+}
+.write{
+    height: 77px;
+    width: 100%;
+    line-height: 77px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 27px;
+
+}
+.rightBoxFrom{
+    width: 410px;
+    height: 495px;
+    background: #FFFFFF;
+    position:absolute;
+}
+.input{
+    height: 80px;
+    width: 100%;
+    margin-top: 28px;
+    position:absolute;
+}
+.inputText{
+    width: 330px;
+    height: 60px;
+    position:absolute;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 22px;
+    position:absolute;
+    background: #FFFFFF;
+    border:none;
+    border-bottom:1px solid #000000;
+    outline: none;
+}
+.input img{
+    margin-top: 18px;
+    margin-left: 10px;
+}
+.inputPassword{
+    height: 80px;
+    width: 100%;
+    margin-top: 116px;
+    position:absolute;
+}
+.inputPassword img{
+    margin-top: 18px;
+    margin-left: 10px;
+}
+.error{
+    height: 35px;
+    width: 180px;
+    margin-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.error span{
+    line-height: 35px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    color: #DF0029;
+    display: none;
+}
+.forgetPasswordBox{
+    height: 48px;
+    width: 100%;
+    margin-top: 5px;
+    position:absolute;
+}
+
+.forgetPassword{
+    height: 45px;
+    width: 125px;
+    line-height: 45px;
+    text-align: center;
+    margin-left: 260px;
+}
+.forgetPassword a:link{
+    color: black;
+}
+.forgetPassword a:hover{
+    font-weight: bold;
+}
+.forgetPassword a:visited {
+    color: black;
+}
+
+.forgetPassword a{
+    text-decoration: none;
+}
+.loginBox{
+    height: 65px;
+    width: 100%;
+    margin-top: 45px;
+    position:absolute;
+}
+.loginButton{
+    height: 40px;
+    width: 80%;
+    border:none;
+    background: black;
+    color: #FFFFFF;
+    margin-left: 41px;
+    margin-top: 15px;
+    font-size: 16px;
+}
+.loginButton:hover{
+    font-size:17px ;
+    cursor:pointer
+}
+.othelogin{
+    height: 45px;
+    width: 100%;
+    margin-top: 115px;
+    position:absolute;
+}
+.otheloginWrite{
+    height: 45px;
+    width: 100%;
+    line-height: 45px;
+    text-align: center;
+}
+.icon{
+    height: 46px;
+    width: 100%;
+    margin-top: 155px;
+    position:absolute;
+}
+.icon img{
+    cursor:pointer
+}
+.icon  img:first-child{
+    margin-left: 30%;
+}
+.icon  img:last-child{
+    margin-left: 18%;
+}
+.registerBox{
+    height: 46px;
+    width: 100%;
+    margin-top: 220px;
+    position:absolute;
+}
+.register{
+    text-align: center;
+    line-height: 46px;
+}
+.register a{
+    text-decoration: none;
+}
+.register a:link{
+    color: black;
+}
+.register a:hover{
+    font-weight: bold;
+}
+.register a:active{
+    color: black;
+}

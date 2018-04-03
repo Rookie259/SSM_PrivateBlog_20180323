@@ -1,0 +1,64 @@
+@charset "utf-8";
+/*** 公用css样式 ***/
+
+body{
+	background-color: #f1f1f1;
+}
+.header{
+	width: 100%;
+	height: 55px;
+	background-color: rgb(65, 54, 53);
+}
+.logo{
+	width: 1024px;
+	height: auto;
+	margin: 0 auto;
+}
+.nav{
+	width: 1024px;
+	margin: 0 auto;
+	height: 35px;
+	margin-top: 5px;
+}
+.nav ul li{
+	float: left;
+	width: 145px;
+	line-height: 35px;
+	height: 35px;
+	font-size: 20px;
+	text-align: center;
+	border-right: 1px dashed #ccc;
+}
+.nav ul li.first{
+	border-left: 1px dashed #ccc;
+}
+.nav ul li a{
+	display: block;
+	border-radius: 40px;
+	width: 115px;
+	height: 35px;
+	margin: 0 auto;
+	color: rgb(65, 54, 53);
+}
+.nav ul li a:hover{
+	background-color: rgba(242, 189, 52, 0.63);
+	filter:alpha(opacity=63);
+}
+
+
+.footer{
+	width: 1024px;
+	height: 40px;
+	margin: 0 auto;
+}
+.footer p{
+	width: 1000px;
+	margin: auto;
+	text-align: center;
+	margin-top: 30px;
+	font-size: 12px;
+	color: rgb(65, 54, 53);
+}
+.footer a{
+	color: rgb(65, 54, 53);
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.muxi.reids.ssm.dao.ReadInformationInterfaces">
+    <!--user-->
+    <resultMap id="readUser" type="UserInfo">
+        <id property="uid" column="uid"></id>
+        <result property="uNickName" column="uNickName"></result>
+        <result property="uPassword" column="uPassword"></result>
+        <result property="uSex" column="uSex"></result>
+        <result property="uEamil" column="uEamil"></result>
+        <result property="uPhone" column="uPhone"></result>
+        <result property="uTime" column="uTime"></result>
+        <result property="uState" column="uState"></result>
+    </resultMap>
+    <!--classify-->
+    <resultMap id="readClassify" type="ClassifyInfo">
+        <id column="clid" property="clid"></id>
+        <result property="clcomment" column="clcomment"></result>
+    </resultMap>
+    <!--blog-->
+    <resultMap id="readBlog" type="BlogInfo">
+        <id column="bid" property="bid"></id>
+        <result property="btitle" column="btitle"></result>
+        <result column="bcontent" property="bcontent"></result>
+        <result column="btime" property="btime"></result>
+        <result column="bpageview" property="bpageview"></result>
+        <result column="blabel" property="blabel"></result>
+        <result column="bstate" property="bstate"></result>
+        <result column="blike" property="blike"></result>
+        <result column="bcommentcount" property="bcommentcount"></result>
+        <association property="buid" column="buid" javaType="UserInfo" select="readUserById"></association>
+        <association property="bclid" column="bclid" javaType="ClassifyInfo" select="readClassifyById"></association>
+    </resultMap>
+    <!--Comment-->
+   <resultMap id="readComment" type="CommentInfo">
+       <id column="cid" property="cid"></id>
+       <result column="cnickname" property="cnickname"></result>
+       <result column="ctext" property="ctext"></result>
+       <result column="cnote" property="cnote"></result>
+       <result column="ctime" property="ctime"></result>
+       <result column="clike" property="clike"></result>
+       <association column="cbid" property="cbid"  javaType="BlogInfo" select="readBlogById"></association>
+       <association column="ctargetid" property="ctargetid" javaType="CommentInfo"  select="readCommentById"></association>
+   </resultMap>
+
+    <!--用户账号密码是否匹配-->
+    <select id="readUserIsExist" resultType="UserInfo">
+       select *from user u where u.ueamil=#{uEamil} AND u.upassword=#{uPassword}
+    </select>
+
+    <!--用户注册时的昵称是否存在-->
+    <select id="readUserNicknameIsExist" resultType="UserInfo">
+      select *from user u where u.unickname = #{uNickName}
+    </select>
+    <!--用户邮箱是否存在-->
+    <select id="readUserEamilIsExist" resultType="UserInfo">
+       select * from user u where u.ueamil = #{uEamil};
+    </select>
+    <!--查询标签-->
+    <select id="readLabel" resultType="String">
+     select  lacomment  from label
+    </select>
+    <!--查询分类-->
+    <select id="readClassify" resultType="String">
+     select clcomment from classify
+    </select>
+    <!--通过string获取classify对象-->
+    <select id="readClassifyInfo" resultType="ClassifyInfo">
+        SELECT *from classify where clcomment = #{clcomment}
+    </select>
+    <!--根据邮箱查询UserInfo-->
+    <select id="readUserInfo" resultType="UserInfo">
+         SELECT *from user u where u.ueamil=#{uEamil}
+    </select>
+    <!--获取前十五条博客  按时间排序-->
+    <select id="readFiftten" resultType="BlogInfo">
+              select *from blog where bstate = '发布状态' order by btime limit 15
+    </select>
+    <!--通过id获取blog内容-->
+    <select id="readBlogById" resultMap="readBlog">
+          SELECT *from blog where bid=#{bid}
+    </select>
+    <!--通过id查询用户-->
+    <select id="readUserById" resultType="UserInfo">
+         select *from user where uid=#{uid}
+    </select>
+    <!--通过id查classify-->
+    <select id="readClassifyById" resultType="ClassifyInfo">
+          select *from classify where clid=#{clid}
+    </select>
+    <!--根据id查询是否存在数据  条件当前博客id-->
+    <select id="readLikeInfoByBid" resultType="LikeInfo">
+          select *from likeblog where lip=#{arg0} and lbid=#{arg1}
+    </select>
+    <!--根据id查询5条数据-->
+    <select id="readBlogTopFive" parameterType="List" resultMap="readBlog">
+        select *from blog where bid in
+        <foreach collection="list" item="item" open="(" close=")"  separator=",">
+            #{item}
+        </foreach>
+    </select>
+    <!--获取所有blog-->
+    <select id="readBlogAll" resultType="BlogInfo">
+          SELECT  *from blog
+    </select>
+    <!--获取所有blog 按时间排序-->
+    <select id="readBlogAllTime" resultMap="readBlog">
+       SELECT  *from blog order by btime
+    </select>
+    <!--查询心情所有记录-->
+    <select id="readEssayAll" resultType="EssayInfo">
+        SELECT  *from essay order by etime desc
+    </select>
+    <!--获取根评论-->
+    <select id="readBaseComment" resultMap="readComment">
+       select  *from comment where cnote = '0' and cbid=#{bid} and ctargetid='0' order by ctime desc
+    </select>
+    <!--通过id查询评论-->
+    <select id="readCommentInfo" resultMap="readComment">
+       select *from comment where cid=#{ctargetid} order by ctime desc
+    </select>
+    <!--通过id查询Comment-->
+    <select id="readCommentById" resultMap="readComment">
+            select *from comment c where c.cid = #{cid}
+    </select>
+    <!--获取评论的楼中楼  Integer  当前博客id-->
+    <select id="readCommentCtargetid" resultMap="readComment">
+         select *from comment where cbid=#{cbid} and ctargetid != 0 order by ctime desc
+    </select>
+    <!--通过昵称查询CommentInfo-->
+    <select id="readCommentByCNickname" resultType="CommentInfo">
+        select *from comment where cid=#{cid} and cnote='0';
+    </select>
+
+
+</mapper>

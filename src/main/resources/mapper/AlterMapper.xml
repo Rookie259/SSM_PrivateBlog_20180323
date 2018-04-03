@@ -1,0 +1,18 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.muxi.reids.ssm.dao.AlterInformateionInterfaces">
+
+    <update id="alterBlogState">
+      UPDATE blog set bstate=#{bstate} where bid=#{bid}
+    </update>
+    <!--修改浏览量-->
+    <update id="alterBlogBpageview">
+        UPDATE blog set bpageview=#{arg0} where bid=#{arg1}
+    </update>
+    <!--修改blog的点赞量-->
+    <update id="alterBlogLikeCount" >
+         UPDATE blog set blike=#{arg0} where bid = #{arg1}
+    </update>
+</mapper>

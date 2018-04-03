@@ -1,0 +1,197 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: #C9B5D4;
+}
+.box{
+    height: 100%;
+    width: 100%;
+}
+
+.left{
+    height: 99%;
+    width: 40%;
+    float: left;
+}
+.leftBox{
+    width: 100%;
+    height: 40%;
+    margin-top: 3%;
+}
+.leftBox img{
+    position:relative;left:50%;
+    margin-left:-100px;
+}
+.right{
+    height: 99%;
+    width: 30%;
+    float: left;
+    margin-left: 10%;
+}
+.rightBox{
+    width: 100%;
+    height: 70%;
+    margin-top: 15%;
+}
+.rightBoxUpTitle{
+    height: 80px;
+    width: 100%;
+    background: #363636;
+}
+.write{
+    height: 77px;
+    width: 100%;
+    line-height: 77px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 27px;
+
+}
+.rightBoxFrom{
+    width: 410px;
+    height: 495px;
+    background: #FFFFFF;
+    position:absolute;
+}
+.input{
+    height: 48px;
+    width: 100%;
+    margin-top: 16px;
+    position:absolute;
+}
+.inputText{
+    width: 330px;
+    height: 30px;
+    position:absolute;
+    margin-top: 13px;
+    margin-left: 10px;
+    font-size: 14px;
+    position:absolute;
+    background: #FFFFFF;
+    border:none;
+    border-bottom:1px solid #000000;
+    outline: none;
+}
+.input img{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.inputPassword{
+    height: 48px;
+    width: 100%;
+    margin-top: 75px;
+    position:absolute;
+}
+.inputPassword img{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.inputPasswordSecond{
+    height: 48px;
+    width: 100%;
+    margin-top: 135px;
+    position:absolute;
+
+}
+.inputPasswordSecond img{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.inputPasswordEamil{
+    height: 48px;
+    width: 100%;
+    margin-top: 195px;
+    position:absolute;
+}
+.inputPasswordEamil img{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.inputEamilCode{
+    height: 48px;
+    width: 100%;
+    margin-top: 255px;
+    position:absolute;
+}
+.inputTextEamil{
+    width: 145px;
+    height: 30px;
+    position:absolute;
+    margin-top: 13px;
+    margin-left: 10px;
+    font-size: 14px;
+    position:absolute;
+    background: #FFFFFF;
+    border:none;
+    border-bottom:1px solid #000000;
+    outline: none;
+}
+
+.inputEamilCode input:first-child{
+    width: 185px;
+    height: 30px;
+    position:absolute;
+    margin-top: 13px;
+    margin-left: 10px;
+    font-size: 14px;
+    position:absolute;
+    background: #FFFFFF;
+    border:none;
+    border-bottom:1px solid #000000;
+    outline: none;
+}
+.inputEamilCode img{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.hint{
+    width: 240px;
+    height: 45px;
+    margin-top: 320px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+.hint span{
+    line-height: 45px;
+    font-weight: bold;
+    font-size: 15px;
+    color: #DF0029;
+    text-align: center;
+}
+.registerBox{
+    width: 100%;
+    height: 85px;
+}
+.sendButton{
+    height: 40px;
+    width: 115px;
+    border:none;
+    background: #184785;
+    color: #FFFFFF;
+    font-size: 13px;
+    margin-left: 200px;
+    border-radius: 6%;
+    margin-top: 4px;
+    position: absolute;
+}
+.sendButton:hover{
+    cursor:pointer;
+}
+
+.registerButton{
+    height: 40px;
+    width: 80%;
+    border:none;
+    background: black;
+    color: #FFFFFF;
+    margin-left: 41px;
+    font-size: 16px;
+    margin-top: 15px;
+}
+.registerButton:hover{
+    font-size:17px ;
+    cursor:pointer
+}

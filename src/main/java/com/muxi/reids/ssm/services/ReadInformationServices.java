@@ -179,7 +179,15 @@ public interface ReadInformationServices {
    public List<CommentInfo> readCommentInfoctargetidNoZero(Integer bid);
 
 
-
+   /*
+   *   @Author: MuXi
+   *   @ClassName: ReadInformationServices
+   *   @param:  * @param null
+   *   @Date: 9:16 2018/4/8
+   *   @Description: 获取blog最大评论量
+   *   @Return: Integer
+   */
+   public List<Integer>  readBlogByIdCommentMaxCount(List<BlogInfo> list);
 
 
 

@@ -133,6 +133,10 @@
     <select id="readCommentByCNickname" resultType="CommentInfo">
         select *from comment where cid=#{cid} and cnote='0';
     </select>
+    <!--读取blog的最大评论量-->
+    <select id="readBlogByIdCommentMaxCount" resultType="Integer">
+           select count(*) from comment where cbid=#{bid}
+    </select>
 
 
 </mapper>

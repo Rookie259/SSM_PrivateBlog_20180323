@@ -244,6 +244,15 @@ public class ReadInformationImpl implements ReadInformationServices {
         return list;
     }
 
+    public List<Integer> readBlogByIdCommentMaxCount(List<BlogInfo> list) {
+        List<Integer> integerList = new ArrayList<Integer>();
+        for (int i = 0; i < list.size(); i++) {
+            Integer maxCommentCount = readInformationInterfaces.readBlogByIdCommentMaxCount(list.get(i).getBid());
+            integerList.add(maxCommentCount);
+        }
+        return integerList;
+    }
+
 
     public void setReadInformationInterfaces(ReadInformationInterfaces readInformationInterfaces) {
         this.readInformationInterfaces = readInformationInterfaces;

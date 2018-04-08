@@ -65,14 +65,10 @@
                     </div>
                     <p class="btn-danger" href="BlogContent.jsp" id="${top.bid}" onclick="blogFullText(this.id);">
                         阅读全文
-                        <span class="badge"> <c:choose>
-                            <c:when test=" ${top.bcommentcount == 0}">
-                                暂无评论
-                            </c:when>
-                            <c:otherwise>
-                                ${top.bcommentcount}
-                            </c:otherwise>
-                        </c:choose>
+                        <span class="badge">
+                            <c:forEach items="${maxCommentCount}" var="cc" begin="${status.index}" end="${status.index}">
+                                ${cc}
+                            </c:forEach>
     </span>
                     </p>
                 </div>

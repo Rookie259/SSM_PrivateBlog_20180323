@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@SessionAttributes({"label", "classify", "blogPreview", "blogLable", "topBlog", "dateBlog", "listLabel", "fullBlogText", "likeState", "recommendBlog", "baseComment","doubleComment"})
+@SessionAttributes({"label", "classify", "blogPreview", "blogLable", "topBlog", "dateBlog", "listLabel", "fullBlogText", "likeState", "recommendBlog", "baseComment","doubleComment","maxCommentCount"})
 @RequestMapping(value = "writeBlog")
 public class WriteBlogControll {
 
@@ -105,7 +105,10 @@ public class WriteBlogControll {
         List<BlogInfo> topBlog = (List<BlogInfo>) blog.get(0);
         List<SunDate> dateBlog = (List<SunDate>) blog.get(1);
         List<List<String>> list_label = (List<List<String>>) blog.get(2);
+        /*评论量*/
+        List<Integer> integerList = readInformationServices.readBlogByIdCommentMaxCount(topBlog);
         map.addAttribute("topBlog", topBlog);
+        map.addAttribute("maxCommentCount", integerList);
         map.addAttribute("dateBlog", dateBlog);
         map.addAttribute("listLabel", list_label);
         return "redirect:/BlogHomePage.jsp";
@@ -133,15 +136,8 @@ public class WriteBlogControll {
         /*---------------------------------------------------*/
         //获取ctargetid不为0的评论
         List<CommentInfo> list_ctargetid_noid = readInformationServices.readCommentInfoctargetidNoZero(new Integer(bid));
-       /* System.out.println(list_ctargetid_noid.size());
-        for (CommentInfo s:
-             list_ctargetid_noid) {
-            System.out.println(s.toString());
-            System.err.println("------------------------------------------------");
-        }*/
         modelMap.put("doubleComment",list_ctargetid_noid);
         /*---------------------------------------------------*/
-
         //查询当前用户对当前博客是否点赞  返回状态
         try {
             String ip = inCommonUse.getIpAddress();
@@ -171,6 +167,8 @@ public class WriteBlogControll {
         List<BlogInfo> topBlog = (List<BlogInfo>) list_blog_all.get(0);
         List<SunDate> dateBlog = (List<SunDate>) list_blog_all.get(1);
         List<List<String>> list_label = (List<List<String>>) list_blog_all.get(2);
+        List<Integer> integerList = readInformationServices.readBlogByIdCommentMaxCount(topBlog);
+        modelMap.addAttribute("maxCommentCount", integerList);
         modelMap.addAttribute("topBlog", topBlog);
         modelMap.addAttribute("dateBlog", dateBlog);
         modelMap.addAttribute("listLabel", list_label);

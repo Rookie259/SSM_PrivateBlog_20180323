@@ -228,4 +228,14 @@ public interface ReadInformationInterfaces {
     *   @Return: Comment
     */
     public CommentInfo readCommentByCNickname(Integer cid);
+
+    /*
+    *   @Author: MuXi
+    *   @ClassName: ReadInformationInterfaces
+    *   @param:  * @param null
+    *   @Date: 9:12 2018/4/8
+    *   @Description: 通过id获取blog的评论量
+    *   @Return: Integer
+    */
+    public Integer readBlogByIdCommentMaxCount(Integer bid);
 }

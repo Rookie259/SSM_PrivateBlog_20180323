@@ -77,4 +77,15 @@ public interface AddInformationServices {
     */
     public boolean addCommentDoubleDeck(String text,String name,String id,String baseCommentId);
     
+    
+    /*
+    *   @Author: MuXi
+    *   @ClassName: AddInformationServices
+    *   @param:  * @param null
+    *   @Date: 16:10 2018/4/10
+    *   @Description: 插入留言
+    *   @Return: boolean
+    */
+    public boolean addLeaveNote();
+    
 }

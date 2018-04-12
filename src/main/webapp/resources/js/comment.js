@@ -280,7 +280,6 @@ var reply = "";
 var nowBaseCommentId;
 function achieveBaseCommentId(id) {
     nowBaseCommentId = id;
-    alert(nowBaseCommentId)
 }
 function writeDoubleDeck() {
     var text = $("#sendDoubleDeckTextarea").val();
@@ -311,15 +310,12 @@ function writeDoubleDeck() {
     if(typeof(nowBaseCommentId) == "undefined"){
         nowBaseCommentId = "0"
     }
-    alert(nowBaseCommentId)
     data = {
         text: text_result,
         reply: replyName,
         bid: bid,
         baseCommentId : nowBaseCommentId
     }
-    alert(nowBaseCommentId)
-    alert(nowBaseCommentId)
     $.ajax({
         type: "post",
         url: "writeComment/doubleDeck.do",

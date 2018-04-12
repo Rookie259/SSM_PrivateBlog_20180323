@@ -53,7 +53,7 @@ public class PrivateHobbyController {
     public String readHobby(ModelMap modelMap){
         List<EssayInfo> essayInfoList = readInformationServices.readEssayAll();
         modelMap.addAttribute("allHobby",essayInfoList);
-        return "redirect:/BlogHobby.jsp";
+        return "redirect:/ho94157877.do";
     }
 
 

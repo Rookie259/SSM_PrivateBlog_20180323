@@ -94,7 +94,7 @@ function blogFullText(id) {
         dataType: "json",
         success: function (msg) {
               if(msg.achieveState == "success")
-                  window.location.href = "BlogView.jsp";
+                  window.location.href = "bodet94192577.do";
         }
     })
 }

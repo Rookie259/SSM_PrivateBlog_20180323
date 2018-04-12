@@ -111,7 +111,7 @@ public class WriteBlogControll {
         map.addAttribute("maxCommentCount", integerList);
         map.addAttribute("dateBlog", dateBlog);
         map.addAttribute("listLabel", list_label);
-        return "redirect:/BlogHomePage.jsp";
+        return "redirect:/hp90880877.do";
     }
 
     /*获取当前blog*/
@@ -172,7 +172,7 @@ public class WriteBlogControll {
         modelMap.addAttribute("topBlog", topBlog);
         modelMap.addAttribute("dateBlog", dateBlog);
         modelMap.addAttribute("listLabel", list_label);
-        return "redirect:/BlogArticle.jsp";
+        return "redirect:/bo94670877.do";
     }
 
 

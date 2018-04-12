@@ -28,10 +28,10 @@
         <li class="first"><a href="writeBlog/achieveBlog.do">首页</a></li>
         <li><a href="writeBlog/achieveAllBlog.do">博客</a></li>
         <li><a href="hobby/addHobby.do">心情随笔</a></li>
-        <li><a href="BolgPhotos.jsp">过往云烟</a></li>
-        <li><a href="BlogLeaveNote.jsp">Blog留言</a></li>
-        <li><a href="BlogAbout.jsp">关于我</a></li>
-        <li><a href="BlogMatchPanic.jsp">休闲一刻</a></li>
+        <li><a href="ph94190877.do">过往云烟</a></li>
+        <li><a href="le94190877.do">Blog留言</a></li>
+        <li><a href="me94000877.do">关于我</a></li>
+        <li><a href="ga94192577.do">休闲一刻</a></li>
     </ul>
 </div>
 <div class="main">
@@ -79,7 +79,7 @@
             <p><a href="#">加载更多</a></p>
         </div>
         <div class="footer" style="margin-left: -85px">
-            <p>Copyright © 2015 | <a href="admin.html">后台入口</a></p>
+            <p>Copyright © 2015 | <a href="si9780876.do">后台入口</a></p>
         </div>
     </div>
 </div>

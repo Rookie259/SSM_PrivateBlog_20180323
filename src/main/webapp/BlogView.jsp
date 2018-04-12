@@ -25,14 +25,14 @@
 <!--菜单-->
 <jsp:include page="BlogLabel.jsp"></jsp:include>
 <div class="main">
-    <div style="padding:20px;margin:0 auto;width: 850px;height: auto;border-radius: 4px;background-color: #FFFFFF;word-wrap:break-word; word-break:break-all; ">
+    <div style="padding:20px;margin:0 auto;width: 950px;height: auto;border-radius: 4px;background-color: #FFFFFF;word-wrap:break-word; word-break:break-all; ">
         <div class="breadcrumb"></div>
         <p class="title">${fullBlogText.btitle}</p>
         <div class="nature" style="margin-top: 25px">
             <span class="author" style="margin-left: -1px"><img
                     src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E7%A8%BF%E4%BB%B6-%E4%BD%9C%E8%80%85.png"
                     style="vertical-align: middle">&nbsp;&nbsp;&nbsp;作者 : ${fullBlogText.buid.uNickName}</span>
-            <span class="view" style="margin-left: 445px"><img
+            <span class="view" style="margin-left: 535px"><img
                     src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E7%9B%B4%E6%92%AD%E8%A7%82%E7%9C%8B%E6%95%B0_32.png"
                     style="vertical-align: middle">&nbsp;&nbsp;&nbsp;浏览量 : ${fullBlogText.bpageview}</span>
             <span class="time"><img src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E6%97%A5%E6%9C%9F.png"
@@ -43,7 +43,7 @@
         </p>
 
         <div class="blogLike">
-            <span class="likename" style="margin-left: 12px;">
+            <span class="likename" style="margin-left: 8px;margin-top: -68px;position: absolute">
                 <c:choose>
                     <c:when test="${likeState == 'noExist'}">
                             <img src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E7%82%B9%E8%B5%9E(2).png"

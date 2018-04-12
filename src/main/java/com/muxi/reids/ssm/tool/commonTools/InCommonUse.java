@@ -5,15 +5,14 @@ package com.muxi.reids.ssm.tool.commonTools;/*
  *   @create: 2018-03-28 09:57
  */
 
+import me.hupeng.ipLocationService.IpLocationResult;
+import me.hupeng.ipLocationService.IpLocationService;
 import org.springframework.stereotype.Component;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 @Component
 public class InCommonUse {
@@ -128,5 +127,34 @@ public class InCommonUse {
         }
         return result;
     }
+
+    /*根据ip获取当前地理位置*/
+    public Map<String, Object> achieveCiteByUserIP(String userIP) {
+        IpLocationService ipLocationService = new IpLocationService();
+        IpLocationResult ipLocationResult = ipLocationService.getIpLocationResult(userIP);
+        String country = ipLocationResult.getCountry();
+        String province = ipLocationResult.getProvince();
+        String cite = ipLocationResult.getCity();
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (country == null || "".equals(country)) {
+            map.put("country", "未知");
+        } else
+            map.put("country", country);
+        if (province == null || "".equals(province)) {
+            map.put("province", "未知");
+        } else
+            map.put("province", province);
+        if (cite == null || "".equals(cite)) {
+            map.put("cite", "未知");
+        } else
+            map.put("cite", cite);
+        if (map.get("province").equals("未知") && map.get("cite").equals("未知")) {
+            map.put("provinceCite", "未知");
+        } else {
+            map.put("provinceCite", province + " " + cite);
+        }
+        return map;
+    }
+
 
 }

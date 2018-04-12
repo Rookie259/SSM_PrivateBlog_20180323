@@ -109,6 +109,10 @@ public class AddInforamteionImpl implements AddInformationServices {
         return true;
     }
 
+    public boolean addLeaveNote() {
+        return false;
+    }
+
     public void setAddInformationInterfaces(AddInformationInterfaces addInformationInterfaces) {
         this.addInformationInterfaces = addInformationInterfaces;
     }

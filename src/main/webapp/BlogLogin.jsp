@@ -55,7 +55,7 @@
                     <img src="resources/images/weixin.png" style="height: 45px; width: 45px">
                 </div>
                 <div class="registerBox">
-                    <div class="register">没有账号?<a href="BlogRegister.jsp">注册?</a></div>
+                    <div class="register">没有账号?<a href="rs9780876.do">注册?</a></div>
                 </div>
             </div>
         </div>

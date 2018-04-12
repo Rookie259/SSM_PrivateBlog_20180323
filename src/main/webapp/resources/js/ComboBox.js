@@ -217,7 +217,6 @@ $("#su").click(function () {
         data: data,
         dataType: "json",
         success: function (msg) {
-            alert(msg.issue)
             if (msg.issue == "success")
                 window.location.href = "BlogPreview.jsp";
         }

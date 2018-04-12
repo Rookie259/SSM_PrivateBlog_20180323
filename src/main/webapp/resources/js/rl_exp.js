@@ -166,8 +166,6 @@ $("#textButton").click(function () {
             }
         }
     })
-
-
 })
 
 /*截取gn字符串 并获得每一位gn'的后一位数字*/

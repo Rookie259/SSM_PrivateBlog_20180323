@@ -1,6 +1,6 @@
 CKEDITOR.editorConfig = function( config ) {
-	config.height = 550;
-	config.width = 950;
+	config.height = 700;
+	config.width = 900;
     config.toolbarGroups = [
         { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
         { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },

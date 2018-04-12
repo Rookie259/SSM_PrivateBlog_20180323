@@ -18,21 +18,22 @@
         <li>
             <div class='picBox'>
                 <div class='show'>
-                <img src="resources/images/cord/pic4-1.png" height='180px' width='180px'>
+                    <img src="resources/images/cord/pic4-1.png" height='180px' width='180px'>
                 </div>
                 <a href="writeBlog/achieveBlog.do">
-                <div class='hide'>
-                    <h3>
-                     网 站 首 页
-                    </h3>
-                </div>
+                    <div class='hide'>
+                        <h3>
+                            网 站 首 页
+                        </h3>
+                    </div>
                 </a>
             </div>
         </li>
         <li>
             <div class='picBox'>
                 <div class='show'>
-                    <img src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/hobby/java.jpg" height='180px' width='180px'>
+                    <img src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/hobby/java.jpg" height='180px'
+                         width='180px'>
                 </div>
                 <div class='hide'>
                     <h3>
@@ -44,25 +45,31 @@
         <li>
             <div class='picBox'>
                 <div class='show'>
-                    <a href=""><img src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/hobby/blog.jpg" height='180px' width='180px'></a>
+                    <img src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/hobby/blog.jpg" height='180px'
+                         width='180px'>
                 </div>
-                <div class='hide'>
-                    <h3>
-                        Blog 留 言
-                    </h3>
-                </div>
+                <a href="BlogLeaveNote.jsp">
+                    <div class='hide'>
+                        <h3>
+                            Blog 留 言
+                        </h3>
+                    </div>
+                </a>
             </div>
         </li>
         <li>
             <div class='picBox'>
                 <div class='show'>
-                    <img src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/hobby/%E9%98%BF%E4%B9%A0_%E9%98%BF%E4%B9%A0-%E8%BF%87%E5%BE%80%E4%BA%91%E7%83%9F%7Bvcd%7D.jpg" height='180px' width='180px'>
+                    <img src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/hobby/%E9%98%BF%E4%B9%A0_%E9%98%BF%E4%B9%A0-%E8%BF%87%E5%BE%80%E4%BA%91%E7%83%9F%7Bvcd%7D.jpg"
+                         height='180px' width='180px'>
                 </div>
-                <div class='hide'>
-                    <h3>
-                        过 往 云 烟
-                    </h3>
-                </div>
+                <a href="BolgPhotos.jsp">
+                    <div class='hide'>
+                        <h3>
+                            过 往 云 烟
+                        </h3>
+                    </div>
+                </a>
             </div>
         </li>
         <li>
@@ -80,13 +87,16 @@
         <li>
             <div class='picBox'>
                 <div class='show'>
-                    <img src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/hobby/8921616_153752003385_2.jpg" height='180px' width='180px'>
+                    <img src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/hobby/8921616_153752003385_2.jpg"
+                         height='180px' width='180px'>
                 </div>
-                <div class='hide'>
-                    <h3>
-                        休 闲 一 刻
-                    </h3>
-                </div>
+                <a href="BlogMatchPanic.jsp">
+                    <div class='hide'>
+                        <h3>
+                            休 闲 一 刻
+                        </h3>
+                    </div>
+                </a>
             </div>
         </li>
     </ul>

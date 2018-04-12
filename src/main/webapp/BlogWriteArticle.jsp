@@ -28,7 +28,7 @@
 <!--菜单-->
 <jsp:include page="BlogLabel.jsp"></jsp:include>
 <div class="main">
-    <div style="width: 1100px;height: auto;border-radius: 4px;background-color: #FFFFFF">
+    <div style="width: 1000px;height: auto;border-radius: 4px;background-color: #FFFFFF">
         <div class="breadcrumb"></div>
         <p class="title">发表博客</p>
         <!--书写博客插件-->

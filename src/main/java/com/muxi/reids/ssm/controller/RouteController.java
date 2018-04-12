@@ -37,12 +37,12 @@ public class RouteController {
     /*心情随笔映射*/
     @RequestMapping(value = "ho94157877.do")
     public String ho94157877() {
-        return "BlogArticle";
+        return "BlogHobby";
     }
     /*过往云烟映射*/
     @RequestMapping(value = "ph94190877.do")
     public String ph94190877() {
-        return "BlogArticle";
+        return "BolgPhotos";
     }
     /*留言映射*/
     @RequestMapping(value = "le94190877.do")

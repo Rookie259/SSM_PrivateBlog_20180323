@@ -24,8 +24,8 @@
         <li><a href="hobby/addHobby.do">心情随笔</a></li>
         <li><a href="ph94190877.do">过往云烟</a></li>
         <li><a href="le94190877.do">Blog留言</a></li>
-        <li><a href="me94000877.do">关于我</a></li>
-        <li><a href="ga94192577.do">休闲一刻</a></li>
+        <li><a href="BlogAbout.jsp">关于我</a></li>
+        <li><a href="BlogMatchPanic.jsp">休闲一刻</a></li>
     </ul>
 </div>
 </body>

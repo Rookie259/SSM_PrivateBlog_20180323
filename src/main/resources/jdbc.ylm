@@ -1,0 +1,55 @@
+#jdbc.driver=com.mysql.jdbc.Driver
+#jdbc.url=jdbc:mysql://127.0.0.1:3306/ssmblog?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+#jdbc.username=root
+#jdbc.password=muxi
+#jdbc.filters=stat
+#\u6700\u5927\u8FDE\u63A5\u6570
+#jdbc.maxPoolSize=30
+#\u6700\u5C0F\u8FDE\u63A5\u6570
+#jdbc.minPoolSize=10
+#\u5173\u95ED\u8FDE\u63A5\u540E\u4E0D\u81EA\u52A8commit
+#jdbc.autoCommitOnClose=false
+#\u83B7\u53D6\u8FDE\u63A5\u8D85\u65F6\u65F6\u95F4
+#jdbc.checkoutTimeout=10000
+#\u5F53\u83B7\u53D6\u8FDE\u63A5\u5931\u8D25\u91CD\u8BD5\u6B21\u6570
+#jdbc.acquireRetryAttempts=2
+
+
+
+#ali  druid\u6570\u636E\u6E90
+
+
+
+jdbc.url=jdbc:mysql://127.0.0.1:3306/ssmblog?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+driverClassName=com.mysql.jdbc.Driver  
+jdbc.username=root  
+jdbc.password=root  
+
+jdbc.filters=stat  
+
+jdbc.maxActive=20  
+jdbc.initialSize=1  
+jdbc.maxWait=60000  
+jdbc.minIdle=10  
+#maxIdle\u5DF2\u7ECF\u5F03\u7528
+jdbc.maxIdle=15  
+
+#配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+jdbc.timeBetweenEvictionRunsMillis=60000
+jdbc.minEvictableIdleTimeMillis=300000
+#用来检测连接是否的sql，要求是一个查询语句。在mysql中通常设置为SELECT 'X'
+jdbc.validationQuery=SELECT 'x'
+#申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery连接是否有效
+jdbc.testWhileIdle=true
+#申请连接时执行validationQuery检测连接是否有效 这个配置会降低性能
+jdbc.testOnBorrow=false
+#归还连接时执行validationQuery检测连接是否有效 这个配置会降低性能
+jdbc.testOnReturn=false
+#要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true
+jdbc.maxOpenPreparedStatements=20
+#对于建立连接超过removeAbandonedTimeout的连接强制关闭
+jdbc.removeAbandoned=true  
+#指定连接建立多长就被强制关闭
+jdbc.removeAbandonedTimeout=1800  
+#指定发生removeabandoned时，是否记录当前线程的堆栈信息到日志中
+jdbc.logAbandoned = true  

@@ -11,16 +11,53 @@
     </bean>
 
     <!--配置数据源-->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass" value="${jdbc.driver}"></property>
-        <property name="jdbcUrl" value="${jdbc.url}"></property>
-        <property name="user" value="${jdbc.username}"></property>
+    <!--配置集成阿里Druid数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="driverClassName" value="${jdbc.driver}"></property>
+        <property name="username" value="${jdbc.username}"></property>
         <property name="password" value="${jdbc.password}"></property>
-        <property name="maxPoolSize" value="${jdbc.maxPoolSize}"></property>
-        <property name="minPoolSize" value="${jdbc.minPoolSize}"></property>
-        <property name="autoCommitOnClose" value="${jdbc.autoCommitOnClose}"></property>
-        <property name="checkoutTimeout" value="${jdbc.checkoutTimeout}"></property>
-        <property name="acquireRetryAttempts" value="${jdbc.acquireRetryAttempts}"></property>
+
+
+        <!--最大连接数-->
+        <!-- <property name="maxPoolSize" value="${jdbc.maxPoolSize}"></property>-->
+        <!--最小连接数-->
+        <!--<property name="minPoolSize" value="${jdbc.minPoolSize}"></property>-->
+        <!--关闭连接后不自动commit-->
+        <!--<property name="autoCommitOnClose" value="${jdbc.autoCommitOnClose}"></property>-->
+        <!--获取连接超时时间-->
+        <!--<property name="checkoutTimeout" value="${jdbc.checkoutTimeout}"></property>-->
+        <!--当获取连接失败重试次数-->
+        <!--<property name="acquireRetryAttempts" value="${jdbc.acquireRetryAttempts}"></property>-->
+
+
+
+        <!--ali数据源-->
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="${jdbc.filters}"></property>
+        <!-- 最大并发连接数 -->
+        <property name="maxActive" value="${jdbc.maxActive}" />
+        <!-- 初始化连接数量 -->
+        <property name="initialSize" value="${jdbc.initialSize}" />
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="${jdbc.maxWait}" />
+        <!-- 最小空闲连接数 -->
+        <property name="minIdle" value="${jdbc.minIdle}" />
+        <!--配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒-->
+        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"></property>
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
+        <!--  <property name="validationQuery" value="${jdbc.validationQuery}" />-->
+        <!--<property name="testWhileIdle" value="${jdbc.testWhileIdle}" />-->
+        <property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
+        <property name="testOnReturn" value="${jdbc.testOnReturn}" />
+        <property name="maxOpenPreparedStatements" value="${jdbc.maxOpenPreparedStatements}" />
+        <!-- 打开removeAbandoned功能 -->
+        <property name="removeAbandoned" value="${jdbc.removeAbandoned}" />
+        <!-- 1800秒，也就是30分钟 -->
+        <property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}" />
+        <!-- 关闭abanded连接时输出错误日志 -->
+        <property name="logAbandoned" value="${jdbc.logAbandoned}" />
     </bean>
 
     <!-- spring和MyBatis整合-->

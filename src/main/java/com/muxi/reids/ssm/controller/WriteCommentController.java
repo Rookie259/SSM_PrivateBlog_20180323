@@ -6,6 +6,7 @@ package com.muxi.reids.ssm.controller;/*
  */
 
 import com.muxi.reids.ssm.entity.BlogInfo;
+import com.muxi.reids.ssm.entity.UserInfo;
 import com.muxi.reids.ssm.services.AddInformationServices;
 import com.muxi.reids.ssm.services.AlterInformationServices;
 import com.muxi.reids.ssm.services.ReadInformationServices;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.List;
@@ -113,6 +115,18 @@ public class WriteCommentController {
          return map;
     }
 
+
+
+
+    /*博客详细页面初始化获取当前用户*/
+    @RequestMapping(value = "InitializationUser.do")
+    @ResponseBody
+    public Map<String,Object> achieveInitializationUser(HttpSession httpSession){
+        Map<String,Object> map = new HashMap<String, Object>();
+        UserInfo userInfo = (UserInfo) httpSession.getAttribute("user");
+        map.put("initializationUserInfo",userInfo);
+        return map;
+    }
 
     public void setReadInformationServices(ReadInformationServices readInformationServices) {
         this.readInformationServices = readInformationServices;

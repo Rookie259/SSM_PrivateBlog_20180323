@@ -1,4 +1,24 @@
-﻿$(function () {
+﻿/*初始化获取当前用户昵称*/
+var OverallSituationNickName = "";
+window.onload = function () {
+    $.ajax({
+        type: "post",
+        url: "writeComment/InitializationUser.do",
+        dataType: "json",
+        success: function (msg) {
+            if (msg != null) {
+                $.each(msg, function (item) {
+                    alert(item.uNickName)
+                    OverallSituationNickName = item.uNickName;
+                    alert("InitializationUser=" + OverallSituationNickName)
+                })
+            }
+        }
+    })
+}
+
+
+$(function () {
     $('.content').flexText();
 });
 
@@ -62,7 +82,7 @@ $('.comment-show').on('click', '.pl-hf', function () {
 
     reply = fhName;
     //回复@
-    var fhN = '回复@'.replace(/^(\s|\u00A0)+/, '').replace(/(\s|\u00A0)+$/, '') + fhName.replace(/^(\s|\u00A0)+/, '').replace(/(\s|\u00A0)+$/, '')+":";
+    var fhN = '回复@'.replace(/^(\s|\u00A0)+/, '').replace(/(\s|\u00A0)+$/, '') + fhName.replace(/^(\s|\u00A0)+/, '').replace(/(\s|\u00A0)+$/, '') + ":";
     //var oInput = $(this).parents('.date-dz-right').parents('.date-dz').siblings('.hf-con');
     var fhHtml = '<div class="hf-con pull-left"> ' +
         '<textarea class="content comment-input hf-input" placeholder="" onkeyup="keyUP(this)"  id="sendDoubleDeckTextarea">' +
@@ -251,7 +271,9 @@ function acieveNickname() {
         url: "writeComment/achieveNickName.do",
         dataType: "json",
         success: function (msg) {
-            nowNIckName = msg.nickname;
+            alert("acieveNickname=" + OverallSituationNickName)
+            if (OverallSituationNickName == "")
+                nowNIckName = msg.nickname;
         }
     })
 }
@@ -278,9 +300,11 @@ $("#sendComment").click(function () {
 
 var reply = "";
 var nowBaseCommentId;
+
 function achieveBaseCommentId(id) {
     nowBaseCommentId = id;
 }
+
 function writeDoubleDeck() {
     var text = $("#sendDoubleDeckTextarea").val();
     var text_split = new Array();
@@ -307,14 +331,14 @@ function writeDoubleDeck() {
     for (var i = 0; i < replyName_arr.length; i++) {
         replyName += replyName_arr[i];
     }
-    if(typeof(nowBaseCommentId) == "undefined"){
+    if (typeof(nowBaseCommentId) == "undefined") {
         nowBaseCommentId = "0"
     }
     data = {
         text: text_result,
         reply: replyName,
         bid: bid,
-        baseCommentId : nowBaseCommentId
+        baseCommentId: nowBaseCommentId
     }
     $.ajax({
         type: "post",

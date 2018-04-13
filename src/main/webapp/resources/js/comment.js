@@ -1,18 +1,31 @@
 ﻿/*初始化获取当前用户昵称*/
-var OverallSituationNickName = "";
-window.onload = function () {
+var nowNIckName;
+$(document).ready(function () {
     $.ajax({
         type: "post",
         url: "writeComment/InitializationUser.do",
         dataType: "json",
         success: function (msg) {
-            if (msg != null) {
-                $.each(msg, function (item) {
-                    alert(item.uNickName)
-                    OverallSituationNickName = item.uNickName;
-                    alert("InitializationUser=" + OverallSituationNickName)
+            if (msg.initializationUserInfo != null) {
+                $.each(msg, function (i, item) {
+                    nowNIckName = item.uNickName;
                 })
+            }else if(msg.initializationUserInfo == null)
+            {
+                acieveNickname();
             }
+        }
+    })
+});
+
+/*获取当前电脑ip*/
+function acieveNickname() {
+    $.ajax({
+        type: "get",
+        url: "writeComment/achieveNickName.do",
+        dataType: "json",
+        success: function (msg) {
+            nowNIckName = msg.nickname;
         }
     })
 }
@@ -259,24 +272,6 @@ $('.comment-show').on('click', '.date-dz-z', function () {
     };
 
 })(jQuery);
-
-
-/*获取当前电脑ip*/
-var nowNIckName;
-acieveNickname();
-
-function acieveNickname() {
-    $.ajax({
-        type: "get",
-        url: "writeComment/achieveNickName.do",
-        dataType: "json",
-        success: function (msg) {
-            alert("acieveNickname=" + OverallSituationNickName)
-            if (OverallSituationNickName == "")
-                nowNIckName = msg.nickname;
-        }
-    })
-}
 
 
 /*评论内容 与后台交互*/

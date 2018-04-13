@@ -32,7 +32,7 @@
             <span class="author" style="margin-left: -1px"><img
                     src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E7%A8%BF%E4%BB%B6-%E4%BD%9C%E8%80%85.png"
                     style="vertical-align: middle">&nbsp;&nbsp;&nbsp;作者 : ${fullBlogText.buid.uNickName}</span>
-            <span class="view" style="margin-left: 535px"><img
+            <span class="view" style="margin-left: 485px"><img
                     src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E7%9B%B4%E6%92%AD%E8%A7%82%E7%9C%8B%E6%95%B0_32.png"
                     style="vertical-align: middle">&nbsp;&nbsp;&nbsp;浏览量 : ${fullBlogText.bpageview}</span>
             <span class="time"><img src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E6%97%A5%E6%9C%9F.png"

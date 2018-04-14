@@ -23,7 +23,7 @@
     boolean isAdmin = false;
     UserInfo userInfo = (UserInfo) session.getAttribute("user");
     if (userInfo != null) {
-        if (userInfo.getuNickName() == "沐惜") ;
+        if (userInfo.getuNickName() == "沐惜")
         isAdmin = true;
     }
 %>

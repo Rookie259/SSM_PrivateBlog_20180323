@@ -238,4 +238,26 @@ public interface ReadInformationInterfaces {
     *   @Return: Integer
     */
     public Integer readBlogByIdCommentMaxCount(Integer bid);
+
+
+    /*
+     *   @Author: MuXi
+     *   @ClassName: AddInformationInterfaces
+     *   @param:  * @param null
+     *   @Date: 17:27 2018/4/13
+     *   @Description: 获取所有博客留言
+     *   @Return: List<LeaveNote>
+     */
+    public List<LeaveNoteInfo> readAllLeaveNote();
+
+
+    /*
+    *   @Author: MuXi
+    *   @ClassName: ReadInformationInterfaces
+    *   @param:  * @param null
+    *   @Date: 14:20 2018/4/14
+    *   @Description: 获取最新的6篇文章
+    *   @Return: List<BlogInfo>
+    */
+    public List<BlogInfo> readSixNewBlog();
 }

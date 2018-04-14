@@ -29,22 +29,26 @@ public class RouteController {
     public String hp90880877() {
         return "BlogHomePage";
     }
+
     /*博客映射*/
     @RequestMapping(value = "bo94670877.do")
     public String bo94670877() {
         return "BlogArticle";
     }
+
     /*心情随笔映射*/
     @RequestMapping(value = "ho94157877.do")
     public String ho94157877() {
         return "BlogHobby";
     }
+
     /*过往云烟映射*/
     @RequestMapping(value = "ph94190877.do")
     public String ph94190877() {
         return "BolgPhotos";
     }
-    /*留言映射*/
+
+    /*博客留言*/
     @RequestMapping(value = "le94190877.do")
     public String le94190877() {
         return "BlogLeaveNote";
@@ -67,4 +71,5 @@ public class RouteController {
     public String bodet94192577() {
         return "BlogView";
     }
+
 }

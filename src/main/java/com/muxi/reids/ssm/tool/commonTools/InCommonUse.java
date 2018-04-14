@@ -5,10 +5,20 @@ package com.muxi.reids.ssm.tool.commonTools;/*
  *   @create: 2018-03-28 09:57
  */
 
+import com.maxmind.geoip2.DatabaseReader;
+import com.maxmind.geoip2.exception.GeoIp2Exception;
+import com.maxmind.geoip2.model.CityResponse;
+import com.maxmind.geoip2.record.City;
+import com.maxmind.geoip2.record.Country;
+import com.maxmind.geoip2.record.Location;
+import com.maxmind.geoip2.record.Subdivision;
 import me.hupeng.ipLocationService.IpLocationResult;
 import me.hupeng.ipLocationService.IpLocationService;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
@@ -154,6 +164,51 @@ public class InCommonUse {
             map.put("provinceCite", province + " " + cite);
         }
         return map;
+    }
+
+
+    /*使用GeoIP的数据库查询当前ip所对应的当前地址*/
+    public List<Map<String,String>> achieveAddressByGeoIP(String ip){
+        List<Map<String,String>> mapList = new ArrayList<Map<String, String>>();
+        Map<String,String> map_province = new HashMap<String, String>();
+        Map<String,String> map_city = new HashMap<String, String>();
+        try {
+            File database = ResourceUtils.getFile("classpath:address/GeoLite2-City.mmdb");
+            // 创建 GeoLite2 数据库
+            DatabaseReader reader = new DatabaseReader.Builder(database).build();
+            // 读取数据库内容
+            InCommonUse inCommonUse = new InCommonUse();
+            InetAddress ipAddress = InetAddress.getByName(inCommonUse.getIpAddress());
+            // 获取查询结果
+            CityResponse response = reader.city(ipAddress);
+
+
+            // 获取国家信息
+            Country country = response.getCountry();
+            System.out.println(country.getNames().get("zh-CN"));    // '中国'
+
+
+            // 获取省份
+            Subdivision subdivision = response.getMostSpecificSubdivision();
+            System.out.println(subdivision.getNames().get("zh-CN")); // '广西壮族自治区'
+            //Map添加省份
+            map_province.put("province",subdivision.getNames().get("zh-CN"));
+
+            // 获取城市
+            City city = response.getCity();
+            System.out.println(city.getNames().get("zh-CN")); // '南宁'
+            map_city.put("city",city.getNames().get("zh-CN"));
+            Location location = response.getLocation();
+            mapList.add(map_province);
+            mapList.add(map_city);
+        } catch (IOException e) {
+            System.out.println("进来了1");
+            e.printStackTrace();
+        } catch (GeoIp2Exception e) {
+            /*检测不到在进来这里*/
+            return null;
+        }
+        return mapList;
     }
 
 

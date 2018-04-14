@@ -1,9 +1,9 @@
 .allDiv {
     width: 95%;
-    height: 1100px;
-    border: 1px black solid;
+    height: auto;
     margin-left: auto;
     margin-right: auto;
+    overflow: hidden;
 }
 
 .leftLeaveNote {
@@ -69,10 +69,6 @@
     color: #E10602;
 }
 
-
-
-
-
 .textSub {
     margin-left: 620px;
     height: 35px;
@@ -110,13 +106,13 @@
 }
 
 .rightLeaveNote {
-    width: 350px;
+    width: 300px;
     height: 450px;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     float: left;
     margin-left: 895px;
     position: absolute;
-    margin-top: 150px;
+    margin-top: 240px;
 }
 
 .noteDiv {
@@ -125,6 +121,8 @@
     margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
+    float: left;
+    background: #FFFFFF;
 }
 
 .innerHeaderImg {
@@ -142,7 +140,7 @@
 
 .rightEssentialInformation {
     width: 667px;
-    height: 148px;
+    height: auto;
     float: left;
     margin-left: 10px;
 }
@@ -154,25 +152,27 @@
 }
 
 .leaveName {
-    width: 150px;
+    width: auto;
     height: 35px;
     line-height: 35px;
     color: red;
     font-weight: bold;
     margin-left: 5px;
     font-size: 14px;
+    float: left;
 }
 
 .leaveProvince {
     color: #B7B7B7;
-    position: absolute;
     margin-top: 13px;
     margin-left: 10px;
+    float: left;
 }
 
 .leaveTime {
-    margin-left: 505px;
-    color: #707070;
+    float: right;
+    color: #B7B7B7;
+    margin-top: 13px;
 }
 
 .leaveContent {
@@ -184,27 +184,29 @@
 
 .functionButton {
     width: 667px;
-    height: 25px;
+    height: auto;
     margin-top: 40px;
 }
 
 .moveLeave {
-    margin-left: 420px;
+    margin-left: 330px;
     font-size: 14px;
     color: red;
     cursor: pointer;
     line-height: 25px;
     visibility: hidden;
+    position: absolute;
 }
-.moveLeave img{
+
+.moveLeave img {
     vertical-align: middle;
 }
+
 .reply {
-    margin-left: 25px;
+    margin-left: 60%;
     color: #555555;
     cursor: pointer;
     vertical-align: middle;
-    position: absolute;
 }
 
 .reply img {
@@ -215,49 +217,86 @@
     line-height: 35px;
     color: #555555;
     cursor: pointer;
-    margin-left: 40px;
+    margin-left: 25px;
     vertical-align: middle;
-    position: absolute;
 }
 
 .replyPraise img {
     margin-top: 6px;
-    margin-left: 25px;
+    margin-left: 5px;
 }
 
 .replyCount {
     color: #555555;
     cursor: pointer;
     font-size: 14px;
-    position: absolute;
-    margin-left: 90px;
+    margin-left: 15px;
     line-height: 30px;
 }
 
-.replyPraiseStamp{
+.replyPraiseStamp {
     line-height: 35px;
     color: #555555;
     cursor: pointer;
-    margin-left: 100px;
+    margin-left: 20px;
     vertical-align: middle;
-    position: absolute;
     margin-top: 5px;
 }
-.replyPraiseStamp img {
-     margin-top: 6px;
-     margin-left: 25px;
- }
 
-.replyCountStamp{
+.replyPraiseStamp img {
+    margin-top: 6px;
+    margin-left: 25px;
+}
+
+.replyCountStamp {
     color: #555555;
     cursor: pointer;
     font-size: 14px;
-    position: absolute;
-    margin-left: 150px;
+    margin-left: 15px;
     line-height: 30px;
 }
-.buildingReview{
+
+.buildingReview {
     width: 667px;
     height: 200px;
     border: 1px solid red;
 }
+/*最新文章*/
+.nwwArticle{
+    width: 95%;
+    height: auto;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.newRightArticleTitle{
+    font-size: 18px;
+    height: 20px;
+    line-height: 20px;
+    font-weight: bold;
+}
+.newHr{
+    height: 1px;
+    border-top: 1px solid #acacac;
+    width: 200px;
+    margin-top: 15px;
+}
+.nwwArticleUl{
+    width: 100%;
+    height: auto;
+    list-style: square;
+    margin-left: 16px;
+}
+.nwwArticleUl li{
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+}
+.nwwArticleUl li a:link{
+    color: black;
+}
+.nwwArticleUl li a:visited{
+    color: black;
+}.nwwArticleUl li a:hover{
+     color: black;
+    text-decoration: underline;
+ }

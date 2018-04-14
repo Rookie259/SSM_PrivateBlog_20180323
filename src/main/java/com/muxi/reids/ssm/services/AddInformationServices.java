@@ -6,6 +6,7 @@ package com.muxi.reids.ssm.services;/*
  */
 
 import com.muxi.reids.ssm.entity.BlogInfo;
+import com.muxi.reids.ssm.entity.LeaveNoteInfo;
 import com.muxi.reids.ssm.entity.UserInfo;
 
 public interface AddInformationServices {
@@ -86,6 +87,9 @@ public interface AddInformationServices {
     *   @Description: 插入留言
     *   @Return: boolean
     */
-    public boolean addLeaveNote();
-    
+    public boolean addLeaveNote(LeaveNoteInfo leaveNoteInfo);
+
+
+
+
 }

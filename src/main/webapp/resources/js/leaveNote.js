@@ -1,4 +1,4 @@
-function replyimg(id) {
+﻿function replyimg(id) {
     $("#" + id).attr('src', 'http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E5%9B%9E%E5%A4%8Dred.png');
     $("#" + id).mouseout(function () {
         $("#" + id).attr('src', 'http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E5%9B%9E%E5%A4%8D.png');
@@ -7,25 +7,25 @@ function replyimg(id) {
 
 
 function noteDivShow() {
-    $(".moveLeave").css('visibility','visible')
+    $(".moveLeave").css('visibility', 'visible')
     $(".noteDiv").mouseout(function () {
-        $(".moveLeave").css('visibility','hidden')
+        $(".moveLeave").css('visibility', 'hidden')
     })
 }
 
 
 //留言点赞
 function leaveNoteLike(id) {
-   $("#"+id).attr('src','http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E7%82%B9%E8%B5%9E(3).png')
-   $("#noteLikeCount").text(Number( $("#noteLikeCount").text()) + 1)
-    $(".replyCount").css('color','red')
+    $("#" + id).attr('src', 'http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E7%82%B9%E8%B5%9E(3).png')
+    $("#noteLikeCount").text(Number($("#noteLikeCount").text()) + 1)
+    $(".replyCount").css('color', 'red')
 }
 
 //留言点踩
 function leaveNoteNoLike(id) {
-    $("#"+id).attr('src','http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E6%AF%85%E8%BF%9B14-%E8%B8%A9%20(1).png')
-    $("#noteNoLikeCount").text(Number( $("#noteNoLikeCount").text()) + 1)
-    $(".replyCountStamp").css('color','red')
+    $("#" + id).attr('src', 'http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E6%AF%85%E8%BF%9B14-%E8%B8%A9%20(1).png')
+    $("#noteNoLikeCount").text(Number($("#noteNoLikeCount").text()) + 1)
+    $(".replyCountStamp").css('color', 'red')
 }
 
 //点击回复增添div
@@ -172,6 +172,7 @@ $(function () {
 
 /*点击发表  添加li  并插入数据库信息*/
 $("#textButton").click(function () {
+    /*动态添加div  添加评论内容*/
     var text = $("#rl_exp_input").val()
     var src_bz = "resources/images/hobby/ho/bzmh/";
     var src_gn = "resources/images/hobby/ho/gnl/";
@@ -188,6 +189,7 @@ $("#textButton").click(function () {
     if (conMR(text))
         text = splitGN(text, "mr", src_mr)
 
+    var leaveNoteDiv;
     data = {
         text: text
     }
@@ -197,9 +199,39 @@ $("#textButton").click(function () {
         data: data,
         dataType: "json",
         success: function (msg) {
-            if (msg.addLeaveNote == "success") {
+                $(".theDividingLineOfTsundere").after("      <div class=\"noteDiv\" onmouseover=\"noteDivShow()\">\n" +
+                    "                <div class=\"innerHeaderImg\">\n" +
+                    "                    <img src=\"http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E7%8B%97%E7%8B%97.png\"\n" +
+                    "                         class=\"imgHeader\">\n" +
+                    "                </div>\n" +
+                    "                <div class=\"rightEssentialInformation\">\n" +
+                    "                    <div class=\"firstDivMessage\">\n" +
+                    "                        <span class=\"leaveName\">" + msg.leaveNoteAddress.lnname + "</span>\n" +
+                    "                        <span class=\"leaveProvince\">" + msg.leaveNoteAddress.lnaddress + "</span>\n" +
+                    "                        <span class=\"leaveTime\">" + msg.leaveNoteAddress.lntime + "</span>\n" +
+                    "                    </div>\n" +
+                    "                    <div class=\"leaveContent\">\n" +
+                    msg.leaveNoteAddress.lntext +
+                    "                    </div>\n" +
+                    "                    <div class=\"functionButton\">\n" +
+                    "                        <span class=\"moveLeave\"><img\n" +
+                    "                                src=\"http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E5%88%A0%E9%99%A4.png\">删除</span>\n" +
+                    "                        <span class=\"reply\"><img\n" +
+                    "                                src=\"http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E5%9B%9E%E5%A4%8D.png\"\n" +
+                    "                                id=\"replyImgid1\" onmouseover=\"replyimg(this.id);\"></span>\n" +
+                    "                        <span class=\"replyPraise\"><img\n" +
+                    "                                src=\"http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E7%82%B9%E8%B5%9E16px%20(1).png\"\n" +
+                    "                                id=\"notelike1\" onclick=\"leaveNoteLike(this.id)\"></span>\n" +
+                    "                        <span class=\"replyCount\">(<span id=\"noteLikeCount\">0</span>)</span>\n" +
+                    "                        <span class=\"replyPraiseStamp\"><img\n" +
+                    "                                src=\"http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E6%AF%85%E8%BF%9B14-%E8%B8%A9.png\"\n" +
+                    "                                style=\"margin-top: 2px\" id=\"note1NoLike1\" onclick=\"leaveNoteNoLike(this.id)\"></span>\n" +
+                    "                        <span class=\"replyCountStamp\">(<span id=\"noteNoLikeCount\">0</span>)</span>\n" +
+                    "                    </div>\n" +
+                    "                </div>\n" +
+                    "            </div>");
+                $("#rl_exp_input").val("");
 
-            }
         }
     })
 })
@@ -224,7 +256,6 @@ function splitGN(text, sp_str, url) {
 }
 
 
-
 function currentTime() {
     var d = new Date(), str = '';
     str += d.getFullYear() + '-';
@@ -235,7 +266,6 @@ function currentTime() {
     str += d.getSeconds();
     return str;
 }
-
 
 
 /*判断是否包含包  bz包图片*/
@@ -269,6 +299,5 @@ function conMR(text) {
     else
         return false;
 }
-
 
 

@@ -190,6 +190,28 @@ public interface ReadInformationServices {
    public List<Integer>  readBlogByIdCommentMaxCount(List<BlogInfo> list);
 
 
+   /*
+   *   @Author: MuXi
+   *   @ClassName: ReadInformationServices
+   *   @param:  * @param null
+   *   @Date: 16:20 2018/4/13
+   *   @Description: 获取当前地址  如果获取不到  则以 未知  代替
+   *   @Return: String
+   */
+   public String achieveNowAddressByGeoIP();
 
+
+   /*
+   *   @Author: MuXi
+   *   @ClassName: ReadInformationServices
+   *   @param:  * @param null
+   *   @Date: 17:26 2018/4/13
+   *   @Description: 获取所有博客留言
+   *   @Return: List<LeaveNote>
+   */
+   public List<LeaveNoteInfo> readAllLeaveNote();
+
+   /*获取最新的六篇文章博客*/
+    public List<BlogInfo> readSixNewBlog();
 
 }

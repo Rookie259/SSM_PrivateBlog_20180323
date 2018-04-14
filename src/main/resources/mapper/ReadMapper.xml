@@ -137,6 +137,13 @@
     <select id="readBlogByIdCommentMaxCount" resultType="Integer">
            select count(*) from comment where cbid=#{bid}
     </select>
-
+    <!--读取所有博客留言-->
+    <select id="readAllLeaveNote" resultType="LeaveNoteInfo">
+        select *from leavenote order by lntime desc
+    </select>
+    <!--获取最新的六片博客-->
+    <select id="readSixNewBlog" resultType="BlogInfo">
+       select *from blog order by btime desc
+    </select>
 
 </mapper>

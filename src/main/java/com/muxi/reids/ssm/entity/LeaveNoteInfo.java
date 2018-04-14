@@ -8,6 +8,7 @@ package com.muxi.reids.ssm.entity;/*
 public class LeaveNoteInfo {
     private Integer lnid;
     private String lnname;
+    private String lntext;
     private String lnaddress;
     private String lntime;
     private String lnstate;
@@ -18,10 +19,20 @@ public class LeaveNoteInfo {
         return "LeaveNoteInfo{" +
                 "lnid=" + lnid +
                 ", lnname='" + lnname + '\'' +
+                ", lntext='" + lntext + '\'' +
                 ", lnaddress='" + lnaddress + '\'' +
                 ", lntime='" + lntime + '\'' +
                 ", lnstate='" + lnstate + '\'' +
                 '}';
+    }
+
+    public void setLntext(String lntext) {
+        this.lntext = lntext;
+    }
+
+    public String getLntext() {
+
+        return lntext;
     }
 
     public void setLnid(Integer lnid) {

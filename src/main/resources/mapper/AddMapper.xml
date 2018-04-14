@@ -54,4 +54,9 @@
         insert into comment(cnickname,ctext,ctime,clike,cbid,ctargetid,cnote,ccheckcomment) values
         ( #{cnickname},#{ctext},#{ctime},#{clike},#{cbid.bid},#{ctargetid.cid},#{cnote},#{ccheckcomment})
     </insert>
+    <!--添加留言-->
+    <insert id="addLeaveNote" keyColumn="lnid" keyProperty="lnid" useGeneratedKeys="true">
+        insert into leavenote(lnname,lntext,lnaddress,lntime) values (
+        #{lnname}, #{lntext}, #{lnaddress}, #{lntime} )
+    </insert>
 </mapper>

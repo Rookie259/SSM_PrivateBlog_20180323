@@ -10,6 +10,7 @@ import com.muxi.reids.ssm.dao.AddInformationInterfaces;
 import com.muxi.reids.ssm.dao.ReadInformationInterfaces;
 import com.muxi.reids.ssm.entity.BlogInfo;
 import com.muxi.reids.ssm.entity.CommentInfo;
+import com.muxi.reids.ssm.entity.LeaveNoteInfo;
 import com.muxi.reids.ssm.entity.UserInfo;
 import com.muxi.reids.ssm.services.AddInformationServices;
 import com.muxi.reids.ssm.tool.Eamil.EamilTool;
@@ -109,8 +110,13 @@ public class AddInforamteionImpl implements AddInformationServices {
         return true;
     }
 
-    public boolean addLeaveNote() {
-        return false;
+    public boolean addLeaveNote(LeaveNoteInfo leaveNoteInfo) {
+        try {
+            addInformationInterfaces.addLeaveNote(leaveNoteInfo);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void setAddInformationInterfaces(AddInformationInterfaces addInformationInterfaces) {

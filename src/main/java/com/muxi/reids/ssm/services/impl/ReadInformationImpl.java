@@ -13,6 +13,7 @@ import com.muxi.reids.ssm.tool.commonTools.InCommonUse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.UnknownHostException;
 import java.util.*;
 
 @Service("readInformationServices")
@@ -251,6 +252,28 @@ public class ReadInformationImpl implements ReadInformationServices {
             integerList.add(maxCommentCount);
         }
         return integerList;
+    }
+
+    public String achieveNowAddressByGeoIP() {
+        try {
+            if (inCommonUse.achieveAddressByGeoIP(inCommonUse.getIpAddress()) != null) {
+                List<Map<String, String>> mapList = inCommonUse.achieveAddressByGeoIP(inCommonUse.getIpAddress());
+                return mapList.get(0).get("province") + mapList.get(1).get("city").toString();
+            } else if (inCommonUse.achieveAddressByGeoIP(inCommonUse.getIpAddress()) == null) {
+                return "未知";
+            }
+        } catch (UnknownHostException e) {
+            return "未知";
+        }
+        return null;
+    }
+
+    public List<LeaveNoteInfo> readAllLeaveNote() {
+        return readInformationInterfaces.readAllLeaveNote();
+    }
+
+    public List<BlogInfo> readSixNewBlog() {
+        return readInformationInterfaces.readSixNewBlog();
     }
 
 

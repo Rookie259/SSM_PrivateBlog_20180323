@@ -5,10 +5,7 @@ package com.muxi.reids.ssm.dao;/*
  *   @create: 2018-03-22 15:37
  */
 
-import com.muxi.reids.ssm.entity.BlogInfo;
-import com.muxi.reids.ssm.entity.CommentInfo;
-import com.muxi.reids.ssm.entity.EssayInfo;
-import com.muxi.reids.ssm.entity.UserInfo;
+import com.muxi.reids.ssm.entity.*;
 
 public interface AddInformationInterfaces {
 
@@ -79,6 +76,15 @@ public interface AddInformationInterfaces {
 
 
 
+    /*
+    *   @Author: MuXi
+    *   @ClassName: AddInformationInterfaces
+    *   @param:  * @param null
+    *   @Date: 16:36 2018/4/13
+    *   @Description: 添加评论
+    *   @Return: void
+    */
+    public void addLeaveNote(LeaveNoteInfo leaveNoteInfo);
 
 
 

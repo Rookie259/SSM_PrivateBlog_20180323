@@ -41,7 +41,8 @@ function chImg() {
 
 //opacity减小函数
 function reduce() {
-    start = (start * 10 - 1) / 10;
+    start = 0.1;
+    //start = (start * 10 - 1) / 10;
     console.log(start);
     if (start > end) {
         img[active].style.opacity = start;

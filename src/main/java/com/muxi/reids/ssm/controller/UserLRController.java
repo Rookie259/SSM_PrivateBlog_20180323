@@ -9,6 +9,7 @@ import com.muxi.reids.ssm.entity.UserInfo;
 import com.muxi.reids.ssm.services.AddInformationServices;
 import com.muxi.reids.ssm.services.ReadInformationServices;
 import com.muxi.reids.ssm.tool.Eamil.EamilTool;
+import com.muxi.reids.ssm.tool.MD5.MD5_Password;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +31,7 @@ public class UserLRController {
 
     @Autowired
     private AddInformationServices addInformationServices;
+
 
     private EamilTool eamilTool = new EamilTool();
 
@@ -44,6 +47,11 @@ public class UserLRController {
     @ResponseBody
     public Map<String, Object> userIsExist(Model model, UserInfo userInfo) {
         Map<String, Object> map = new HashMap<String, Object>();
+        try {
+            userInfo.setuPassword(new MD5_Password().getMD5(userInfo.getuPassword()));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
         if (readInformationServices.readUserIsExist(userInfo) == false)
             map.put("loginState", "noExist");
         else {

@@ -23,6 +23,11 @@
         <property name="prefix" value=""/>
         <property name="suffix" value=".jsp"/>
     </bean>
+    <!-- 配置视图解析器END-->
+
+    <!--静态资源文件映射-->
+   <!-- <mvc:resources mapping="/resources/**" location="/resources/"></mvc:resources>-->
+     <!--静态资源文件映射END-->
 
     <!--文件上传-->
     <bean id="multipartResolver"
@@ -35,6 +40,33 @@
         </property>
     </bean>
 
+    <!--拦截器-->
+   <!-- <mvc:interceptors>
+     &lt;!&ndash;   <mvc:interceptor>
+            <mvc:mapping path="userController/checkRegisterIsOk"/>
+            <bean id="registerInterceptor" class="com.muxi.reids.ssm.interceptor.InterceptorRegister"/>
+        </mvc:interceptor>&ndash;&gt;
+    </mvc:interceptors>-->
+    <!--拦截器END-->
+    <!--配置500错误跳转页面-->
+    <!-- 全局异常配置 -->
+<!--    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">../../Blog500</prop>
+                <prop key="java.lang.Throwable">../../Blog500</prop>
+            </props>
+        </property>
+        <property name="statusCodes">
+            <props>
+                <prop key="Blog500">500</prop>
+            </props>
+        </property>
+       &lt;!&ndash;默认错误页面，当找不到上面mappings中指定的异常对应视图时，使用本默认配置&ndash;&gt;
+        <property name="defaultErrorView" value="Blog500.jsp"></property>
+      &lt;!&ndash; 默认HTTP状态码&ndash;&gt;
+        <property name="defaultStatusCode" value="500"></property>
+    </bean>-->
 
     <!--配置redis 和 spring cache-->
     <!--扫描redis配置文件-->
@@ -50,11 +82,11 @@
     </bean>
 
     <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-              p:hostName="${redis.host}"
-              p:port="${redis.port}"
-              p:password="${redis.password}"
-              p:pool-config-ref="poolConfig"
-              p:timeout="100000"/>
+          p:hostName="${redis.host}"
+          p:port="${redis.port}"
+          p:password="${redis.password}"
+          p:pool-config-ref="poolConfig"
+          p:timeout="100000"/>
 
     <!-- Jedis模板配置  -->
     <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
@@ -64,14 +96,23 @@
         <property name="jedisConnectionFactory" ref="connectionFactory"></property>
     </bean>
 
+    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+        <property name="caches">
+            <set>
+                <!--<bean class="com.muxi.reids.ssm.tool.redis.RedisCache">
+                    &lt;!&ndash;待定&ndash;&gt;
+                    <property name="" ref="redisTemplate"></property>
+                    <property name="" ref="redisTemplate"></property>
+                </bean>-->
+            </set>
+        </property>
+    </bean>
 
     <!--实例化-->
-
     <!--工具类实例化-->
     <!--Multipart转File-->
     <bean id="toolMultipart" class="com.muxi.reids.ssm.tool.commonTools.MultipartFileTranFile"></bean>
     <!--常用工具-->
     <bean id="inCommonUse" class="com.muxi.reids.ssm.tool.commonTools.InCommonUse"></bean>
-
 </beans>
 

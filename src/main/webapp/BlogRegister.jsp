@@ -6,9 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <html>
 <head>
     <title>Blog注册</title>
+    <base href=" <%=basePath%>">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="resources/css/rookieRegister.css">
     <script type="text/javascript" src="resources/js/tool/jquery-3.2.1.js" CHARSET="UTF-8"></script>

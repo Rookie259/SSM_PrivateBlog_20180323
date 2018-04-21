@@ -213,7 +213,7 @@ $("#su").click(function () {
     }
     $.ajax({
         type: "post",
-        url: "writeBlog/preview.do",
+        url: "writeBlog/preview",
         data: data,
         dataType: "json",
         success: function (msg) {

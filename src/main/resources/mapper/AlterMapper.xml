@@ -15,4 +15,12 @@
     <update id="alterBlogLikeCount" >
          UPDATE blog set blike=#{arg0} where bid = #{arg1}
     </update>
+    <!--修改commment的点赞量-->
+    <update id="alterCommentLikeCount">
+        update comment set clike=#{arg0} where cid=#{arg1}
+    </update>
+    <!--当前博客评论量加一-->
+    <update id="nowBlogCommentPlusOne">
+        update blog set bcommentcount=#{arg0} where bid=#{arg1}
+    </update>
 </mapper>

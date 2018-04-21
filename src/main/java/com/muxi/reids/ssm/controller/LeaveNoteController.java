@@ -16,11 +16,11 @@ import com.muxi.reids.ssm.tool.commonTools.InCommonUse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.DispatcherServlet;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.net.UnknownHostException;
 import java.sql.Blob;
@@ -31,7 +31,7 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "note")
 @SessionAttributes({"allLeaveNote","newSixBlog","recommendBlog","recommendBlog","baseComment","doubleComment","likeState","fullBlogText"})
-public class LeaveNoteController {
+public class LeaveNoteController  {
     @Autowired
     private ReadInformationServices readInformationServices;
 
@@ -45,7 +45,7 @@ public class LeaveNoteController {
     private InCommonUse inCommonUse;
 
     /*博客留言*/
-    @RequestMapping(value = "/leaveNote.do")
+    @RequestMapping(value = "/leaveNote")
     @ResponseBody
     public Map<String,Object> leaveNote(String text, HttpSession httpSession) {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -75,19 +75,19 @@ public class LeaveNoteController {
 
 
     /*获取所有留言 以及 最新的6篇文章*/
-    @RequestMapping(value = "/achieveAllNote.do")
+    @RequestMapping(value = "/achieveAllNote", method = RequestMethod.GET)
     public String achieveBlogLeaveNote(ModelMap modelMap){
         List<LeaveNoteInfo> leaveNoteInfoList = readInformationServices.readAllLeaveNote();
         modelMap.addAttribute("allLeaveNote",leaveNoteInfoList);
         /*获取最新的六片文章*/
         List<BlogInfo> blogInfos = readInformationServices.readSixNewBlog();
         modelMap.addAttribute("newSixBlog",blogInfos);
-        return "redirect:/le94190877.do";
+        return "../BlogLeaveNote";
     }
 
 
     /*获取点击的最新文章详细内容*/
-    @RequestMapping(value = "/achieveNewArticle.do")
+    @RequestMapping(value = "/achieveNewArticle")
     public String achieveBlogArticle(ModelMap modelMap,String blogId){
         BlogInfo blogInfo_1 = readInformationServices.readBlogById(blogId);
         alterInformationServices.alterBlogBpageview(new Integer(blogInfo_1.getBpageview()) + 1, new Integer(blogId));
@@ -123,9 +123,8 @@ public class LeaveNoteController {
         if (blogInfo_2 != null) {
             modelMap.addAttribute("fullBlogText", blogInfo_2);
         }
-         return "redirect:/bodet94192577.do";
+         return "redirect:/bodet94192577";
     }
-
 
 
     public void setReadInformationServices(ReadInformationServices readInformationServices) {

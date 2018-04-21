@@ -5,10 +5,15 @@
   Time: 11:39
   To change this template use File | Settings | File Templates.
 --%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>翻转</title>
+    <base href=" <%=basePath%>">
     <link rel="stylesheet" href="resources/css/filpCord.css">
     <script type="text/javascript" src="resources/js/tool/jquery-1.7.2.min.js"></script>
 </head>
@@ -20,7 +25,7 @@
                 <div class='show'>
                     <img src="resources/images/cord/pic4-1.png" height='180px' width='180px'>
                 </div>
-                <a href="writeBlog/achieveBlog.do">
+                <a href="writeBlog/achieveBlog">
                     <div class='hide'>
                         <h3>
                             网 站 首 页

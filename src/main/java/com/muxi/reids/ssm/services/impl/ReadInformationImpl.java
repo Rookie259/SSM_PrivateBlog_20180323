@@ -5,8 +5,11 @@ package com.muxi.reids.ssm.services.impl;/*
  *   @create: 2018-03-22 10:39
  */
 
+import com.muxi.reids.ssm.dao.AddInformationInterfaces;
+import com.muxi.reids.ssm.dao.AlterInformateionInterfaces;
 import com.muxi.reids.ssm.dao.ReadInformationInterfaces;
 import com.muxi.reids.ssm.entity.*;
+import com.muxi.reids.ssm.services.AddInformationServices;
 import com.muxi.reids.ssm.services.ReadInformationServices;
 import com.muxi.reids.ssm.tool.Eamil.EamilTool;
 import com.muxi.reids.ssm.tool.commonTools.InCommonUse;
@@ -23,9 +26,16 @@ public class ReadInformationImpl implements ReadInformationServices {
     @Autowired
     private ReadInformationInterfaces readInformationInterfaces;
 
+    @Autowired
+    private AddInformationInterfaces addInformationInterfaces;
+
+    @Autowired
+    private AlterInformateionInterfaces alterInformateionInterfaces;
+
 
     @Autowired
     private InCommonUse inCommonUse;
+
 
     private EamilTool tool = new EamilTool();
 
@@ -108,8 +118,8 @@ public class ReadInformationImpl implements ReadInformationServices {
         return list_all;
     }
 
-    public List readAllBlogTime() {
-        List<BlogInfo> list = readInformationInterfaces.readBlogAllTime();
+    public List readAllBlogTime(String begin,String end) {
+        List<BlogInfo> list = readInformationInterfaces.readBlogAllTime(new Integer(begin),new Integer(end));
         List<SunDate> list_date = new ArrayList<SunDate>();
         List<List<String>> list_label = new ArrayList<List<String>>();
         for (int i = 0; i < list.size(); i++) {
@@ -276,6 +286,57 @@ public class ReadInformationImpl implements ReadInformationServices {
         return readInformationInterfaces.readSixNewBlog();
     }
 
+    public boolean readBlogAchieveLikeIsExist(UserInfo userInfo, String nickname, String bid, String cid) {
+        /*查询是否存在点赞记录*/
+        List<LikeInfo> commentInfoList = readInformationInterfaces.readLikeInfoFirsetFloorIsExist(nickname, new Integer(bid), new Integer(cid));
+        if (commentInfoList.size() == 0) {
+            if (userInfo == null) {
+                /*插入点赞记录*/
+                addInformationInterfaces.addFirstFoolLike(nickname, new Integer(bid), new Integer(cid));
+                /*查询贡献赞人数*/
+                Integer countLike = readInformationInterfaces.readNowUserCommentLikeCount(new Integer(cid));
+                /*修改comment  like属性*/
+                /*查询comment对象*/
+                CommentInfo commentInfo = readInformationInterfaces.readCommentInfoByLike(new Integer(cid));
+                commentInfo.setClike(countLike);
+                /*修改评论的点赞数量*/
+                alterInformateionInterfaces.alterCommentLikeCount(new Integer(countLike), new Integer(cid));
+                return true;
+            } else {
+                addInformationInterfaces.addFirstFoolLike(userInfo.getuNickName(), new Integer(bid), new Integer(cid));
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public List<String> readGetFirstLevelCommentThumbUpStatusList(UserInfo userInfo, List<CommentInfo> commentInfoList) throws UnknownHostException {
+        List<String> stringList = new ArrayList<String>();
+        if (userInfo != null) {
+            for (CommentInfo commentInfo :
+                    commentInfoList) {
+                if (readInformationInterfaces.readNowUserIsLikeComment(userInfo.getuNickName(), commentInfo.getCid()) != null) {
+                    stringList.add("exist");
+                } else {
+                    stringList.add("noExist");
+                }
+            }
+        } else {
+            String nickname = "游客" + inCommonUse.getIpAddress();
+            for (CommentInfo commentInfo :
+                    commentInfoList) {
+                if (readInformationInterfaces.readNowUserIsLikeComment(nickname, commentInfo.getCid()) != null) {
+                    stringList.add("exist");
+                } else {
+                    stringList.add("noExist");
+                }
+            }
+        }
+
+        return stringList;
+    }
+
 
     public void setReadInformationInterfaces(ReadInformationInterfaces readInformationInterfaces) {
         this.readInformationInterfaces = readInformationInterfaces;
@@ -283,5 +344,13 @@ public class ReadInformationImpl implements ReadInformationServices {
 
     public void setInCommonUse(InCommonUse inCommonUse) {
         this.inCommonUse = inCommonUse;
+    }
+
+    public void setAddInformationInterfaces(AddInformationInterfaces addInformationInterfaces) {
+        this.addInformationInterfaces = addInformationInterfaces;
+    }
+
+    public void setAlterInformateionInterfaces(AlterInformateionInterfaces alterInformateionInterfaces) {
+        this.alterInformateionInterfaces = alterInformateionInterfaces;
     }
 }

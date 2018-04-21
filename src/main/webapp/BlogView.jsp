@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 沐惜
@@ -7,10 +6,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
+<%@ page import="com.muxi.reids.ssm.entity.UserInfo" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>博客详情</title>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <base href=" <%=basePath%>">
     <!--评论-->
     <link rel="stylesheet" href="resources/css/comment.css">
     <link rel="stylesheet" href="resources/css/previes.css">
@@ -18,6 +24,7 @@
 
 </head>
 <body>
+<% UserInfo userInfo = (UserInfo) session.getAttribute("user");%>
 <!--悬浮按钮-->
 <jsp:include page="BlogSuspension.jsp"></jsp:include>
 <!--logo-->
@@ -90,10 +97,11 @@
                 </div>
                 <!--评论区域 end-->
                 <!--回复区域 begin-->
-                <div class="comment-show">
+                <div class="comment-show" id="commentAjax">
                     <!--评论div-->
                     <c:forEach items="${baseComment}" var="baseComment">
-                        <input type="text" id="hideid${baseComment.cid}"  value="${baseComment.cid}" style="display: none">
+                        <input type="text" id="hideid${baseComment.cid}" value="${baseComment.cid}"
+                               style="display: none">
                         <div class="comment-show-con clearfix">
                             <div class="comment-show-con-img pull-left"><img
                                     src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/%E7%8B%97%E7%8B%97.png"
@@ -106,45 +114,92 @@
                                 <div class="date-dz">
                                     <span class="date-dz-left pull-left comment-time">${baseComment.ctime}</span>
                                     <div class="date-dz-right pull-right comment-pl-block">
-                                            <%-- <a href="javascript:;" class="removeBlock">删除</a>--%>
+                                        <%
+                                            if (userInfo != null) {
+                                        %>
+                                        <a href="javascript:;" class="removeBlock">删除</a>
+                                        <%
+                                            }%>
                                         <a href="javascript:;"
-                                           class="date-dz-pl pl-hf hf-con-block pull-left" id="${baseComment.cid}" onclick="achieveBaseCommentId(this.id)">回复</a>
+                                           class="date-dz-pl pl-hf hf-con-block pull-left" id="${baseComment.cid}"
+                                           onclick="achieveBaseCommentId(this.id)">回复</a>
                                         <span class="pull-left date-dz-line">|</span>
-                                        <a href="javascript:;" class="date-dz-z pull-left"><i
-                                                class="date-dz-z-click-red"></i>赞 (<i class="z-num">0</i>)</a>
+
+                                        <c:forEach items="${list_FirstLikeState}" var="firstLikeState"
+                                                   begin="${baseCommentStatus.index}" end="${baseCommentStatus.index}">
+                                            <c:choose>
+                                                <c:when test="${firstLikeState == \"exist\"}">
+                                                    <a href="javascript:;" class="date-dz-z pull-left date-dz-z-click"
+                                                       id="assist${baseComment.cid}" onclick="firstFloor(this.id)"><i
+                                                            class="date-dz-z-click-red red"></i>赞 (<i
+                                                            class="z-num">${baseComment.clike}</i>)</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a href="javascript:;" class="date-dz-z pull-left"
+                                                       id="assist${baseComment.cid}"
+                                                       onclick="firstFloor(this.id)"><i
+                                                            class="date-dz-z-click-red"></i>赞 (<i
+                                                            class="z-num">${baseComment.clike}</i>)</a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
                                     </div>
                                 </div>
                                 <!--子评论-->
                                 <div class="hf-list-con">
                                     <c:forEach items="${doubleComment}" var="dou" varStatus="douSta">
-                                            <c:choose>
-                                                <c:when test="${dou.ccheckcomment== baseComment.cid}">
-                                                    <!--楼中楼-->
-                                                    <div class="all-pl-con">
-                                                        <div class="pl-text hfpl-text clearfix">
-                                                            <a href="#" class="comment-size-name">
-                                                                    ${dou.cnickname}
-                                                            </a>
-                                                            <span class="my-pl-con">回复@<a href="#" class="atName">${dou.ctargetid.cnickname}</a> : ${dou.ctext}
+                                        <c:choose>
+                                            <c:when test="${dou.ccheckcomment== baseComment.cid}">
+                                                <!--楼中楼-->
+                                                <div class="all-pl-con">
+                                                    <div class="pl-text hfpl-text clearfix">
+                                                        <a href="#" class="comment-size-name">
+                                                                ${dou.cnickname}
+                                                        </a>
+                                                        <span class="my-pl-con">回复@<a href="#"
+                                                                                      class="atName">${dou.ctargetid.cnickname}</a> : ${dou.ctext}
                                         </span>
-                                                        </div>
-                                                        <div class="date-dz">
+                                                    </div>
+                                                    <div class="date-dz">
                                         <span class="date-dz-left pull-left comment-time">
                                                 ${dou.ctime}
                                         </span>
-                                                            <div class="date-dz-right pull-right comment-pl-block">
-                                                               <%-- <a href="javascript:;" class="removeBlock">删除</a>--%>
-                                                                <a href="javascript:;"
-                                                                   class="date-dz-pl pl-hf hf-con-block pull-left"  id="${baseComment.cid}" onclick="achieveBaseCommentId(this.id)">回复</a>
-                                                                <span class="pull-left date-dz-line">|</span> <a
-                                                                    href="javascript:;" class="date-dz-z pull-left">
-                                                                <i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a>
-                                                            </div>
+                                                        <div class="date-dz-right pull-right comment-pl-block">
+                                                                <%-- <a href="javascript:;" class="removeBlock">删除</a>--%>
+                                                            <a href="javascript:;"
+                                                               class="date-dz-pl pl-hf hf-con-block pull-left"
+                                                               id="${baseComment.cid}"
+                                                               onclick="achieveBaseCommentId(this.id)">回复</a>
+                                                            <span class="pull-left date-dz-line">|</span>
+                                                            <c:forEach items="${commentInfoListSecondLikeState}"
+                                                                       var="secondState" varStatus="secondStateStatus">
+                                                                <c:choose>
+                                                                    <c:when test="${secondState == \"exist\"}">
+                                                                        <a href="javascript:;"
+                                                                           class="date-dz-z pull-left date-dz-z-click"
+                                                                           id="assist${dou.cid}"
+                                                                           onclick="firstFloor(this.id)"><i
+                                                                                class="date-dz-z-click-red red"></i>赞
+                                                                            (<i
+                                                                                    class="z-num">${dou.clike}</i>)</a>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <a
+                                                                                href="javascript:;"
+                                                                                class="date-dz-z pull-left"
+                                                                                id="assist${dou.cid}"
+                                                                                onclick="firstFloor(this.id)">
+                                                                            <i class="date-dz-z-click-red"></i>赞 (<i
+                                                                                class="z-num">${dou.clike}</i>)</a>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </c:forEach>
                                                         </div>
                                                     </div>
-                                                    <!--楼中楼END-->
-                                                </c:when>
-                                            </c:choose>
+                                                </div>
+                                                <!--楼中楼END-->
+                                            </c:when>
+                                        </c:choose>
                                     </c:forEach>
                                 </div>
                                 <!--子评论END-->

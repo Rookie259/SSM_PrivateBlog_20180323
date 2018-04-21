@@ -14,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.DispatcherServlet;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +40,7 @@ public class PrivateHobbyController {
     private InCommonUse inCommonUse;
 
     /*添加心情记录*/
-    @RequestMapping(value = "/addHobby.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/addHobby", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> addHobby(String text) {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -49,17 +52,14 @@ public class PrivateHobbyController {
     }
 
     /*查询性情记录 并排序*/
-    @RequestMapping(value = "/addHobby.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/readHobby", method = RequestMethod.GET)
     public String readHobby(ModelMap modelMap){
         List<EssayInfo> essayInfoList = readInformationServices.readEssayAll();
         modelMap.addAttribute("allHobby",essayInfoList);
-        return "redirect:/ho94157877.do";
+        return "../BlogHobby";
     }
 
 
-    public void setReadInformationServices(ReadInformationServices readInformationServices) {
-        this.readInformationServices = readInformationServices;
-    }
 
     public void setAddInformationServices(AddInformationServices addInformationServices) {
         this.addInformationServices = addInformationServices;

@@ -6,18 +6,24 @@ package com.muxi.reids.ssm.controller;/*
  */
 
 import com.muxi.reids.ssm.entity.BlogInfo;
+import com.muxi.reids.ssm.entity.CommentInfo;
 import com.muxi.reids.ssm.entity.UserInfo;
 import com.muxi.reids.ssm.services.AddInformationServices;
 import com.muxi.reids.ssm.services.AlterInformationServices;
 import com.muxi.reids.ssm.services.ReadInformationServices;
 import com.muxi.reids.ssm.tool.commonTools.InCommonUse;
+import com.sun.corba.se.spi.ior.ObjectKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.DispatcherServlet;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.net.UnknownHostException;
 import java.util.HashMap;
@@ -40,8 +46,9 @@ public class WriteCommentController {
     @Autowired
     private InCommonUse inCommonUse;
 
+
     /*文章点赞*/
-    @RequestMapping(value = "writeLike.do")
+    @RequestMapping(value = "writeLike")
     @ResponseBody
     public Map<String, Object> checkWriteLike(Model model, String bid) {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -69,7 +76,7 @@ public class WriteCommentController {
 
 
     /*获取当前用户ip地址  返回昵称*/
-    @RequestMapping(value = "achieveNickName.do", method = RequestMethod.GET)
+    @RequestMapping(value = "achieveNickName", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> achieveNowNickName() {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -91,43 +98,81 @@ public class WriteCommentController {
 
 
     /*发送根评论 0*/
-    @RequestMapping(value = "sendZeroComment.do", method = RequestMethod.POST)
+    @RequestMapping(value = "sendZeroComment", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> sendComment(String id,String nickname, String text) {
+    public Map<String, Object> sendComment(String id, String nickname, String text, HttpSession session) {
         Map<String, Object> map = new HashMap<String, Object>();
         String nowTime = inCommonUse.achieveNowTime();
-        if (addInformationServices.addBaseComment(nickname,text,nowTime,id))
+        BlogInfo blogInfo = (BlogInfo) session.getAttribute("fullBlogText");
+        if (addInformationServices.addBaseComment(nickname, text, nowTime, id) &&  alterInformationServices.blogCommentCountPlusOne(blogInfo, id)) {
             map.put("addBaseComment", "success");
-        else
+        } else
             map.put("addBaseComment", "error");
         return map;
     }
 
-    /*楼中楼回复评论*/
-    @RequestMapping(value = "doubleDeck.do", method = RequestMethod.POST)
+    /*局部刷新评论区*/
+    @RequestMapping(value = "/achieveLocalitycomment", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> doubleDeckComment(String text,String reply,String bid,String baseCommentId){
-        Map<String,Object> map = new HashMap<String, Object>();
-        /*插入楼中楼子评论*/
-        if(addInformationServices.addCommentDoubleDeck(text,reply,bid,baseCommentId))
-            map.put("doubleDeckState","success");
-        else
-            map.put("doubleDeckState","error");
-         return map;
+    public void achieveLocalitycomment(ModelMap modelMap, String bid) {
+        /*获取根评论*/
+        List<CommentInfo> commentInfo_list = readInformationServices.readBaseComment(bid);
+        /*根评论存入session*/
+        modelMap.addAttribute("baseComment", commentInfo_list);
+        List<CommentInfo> list_ctargetid_noid = readInformationServices.readCommentInfoctargetidNoZero(new Integer(bid));
+        modelMap.put("doubleComment", list_ctargetid_noid);
     }
 
 
+    /*楼中楼回复评论*/
+    @RequestMapping(value = "doubleDeck", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> doubleDeckComment(String text, String reply, String bid, String baseCommentId,HttpSession session) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        /*插入楼中楼子评论*/
+        /*当前博客评论量加一*/
+        BlogInfo blogInfo = (BlogInfo) session.getAttribute("fullBlogText");
+        if (addInformationServices.addCommentDoubleDeck(text, reply, bid, baseCommentId)  &&  alterInformationServices.blogCommentCountPlusOne(blogInfo, bid)) {
+            map.put("doubleDeckState", "success");
+        } else
+            map.put("doubleDeckState", "error");
+        return map;
+    }
+
+    /*一楼点赞记录*/
+    @RequestMapping(value = "achieveFirstFloorLike", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> achieveFirstFloorLike(String bid, String cid, ModelMap modelMap, HttpSession session) {
+        /*游客名称*/
+        String nowIp = null;
+        try {
+            nowIp = inCommonUse.getIpAddress();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        String nickname = "游客" + nowIp;
+        Map<String, Object> map = new HashMap<String, Object>();
+        /*查询是否存在点赞记录*/
+        /*获取当前人的ip地址*/
+        UserInfo userInfo = (UserInfo) session.getAttribute("user");
+        if (readInformationServices.readBlogAchieveLikeIsExist(userInfo, nickname, bid, cid))
+            map.put("addFirstFloorLikeState", "noExist");
+        else
+            map.put("addFirstFloorLikeState", "exist");
+        return map;
+    }
 
 
     /*博客详细页面初始化获取当前用户*/
-    @RequestMapping(value = "InitializationUser.do")
+    @RequestMapping(value = "InitializationUser")
     @ResponseBody
-    public Map<String,Object> achieveInitializationUser(HttpSession httpSession){
-        Map<String,Object> map = new HashMap<String, Object>();
+    public Map<String, Object> achieveInitializationUser(HttpSession httpSession) {
+        Map<String, Object> map = new HashMap<String, Object>();
         UserInfo userInfo = (UserInfo) httpSession.getAttribute("user");
-        map.put("initializationUserInfo",userInfo);
+        map.put("initializationUserInfo", userInfo);
         return map;
     }
+
 
     public void setReadInformationServices(ReadInformationServices readInformationServices) {
         this.readInformationServices = readInformationServices;

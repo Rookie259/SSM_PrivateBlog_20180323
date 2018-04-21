@@ -87,7 +87,15 @@ public interface AddInformationInterfaces {
     public void addLeaveNote(LeaveNoteInfo leaveNoteInfo);
 
 
-
+    /*
+    *   @Author: MuXi
+    *   @ClassName: AddInformationInterfaces
+    *   @param:  * @param null
+    *   @Date: 10:38 2018/4/19
+    *   @Description: 插入一楼点赞记录
+    *   @Return: void
+    */
+    public void addFirstFoolLike(String lip,Integer lbid,Integer lcid);
 
 
 

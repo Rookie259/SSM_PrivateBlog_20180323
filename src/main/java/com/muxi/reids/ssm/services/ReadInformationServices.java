@@ -7,6 +7,7 @@ package com.muxi.reids.ssm.services;/*
 
 import com.muxi.reids.ssm.entity.*;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 public interface ReadInformationServices {
@@ -100,7 +101,7 @@ public interface ReadInformationServices {
      *   @Description: 获取按时间排序的所有信息
      *   @Return: List<BlogInfo>
      */
-     public List readAllBlogTime();
+     public List readAllBlogTime(String begin,String end);
 
 
 
@@ -213,5 +214,13 @@ public interface ReadInformationServices {
 
    /*获取最新的六篇文章博客*/
     public List<BlogInfo> readSixNewBlog();
+
+
+    /*查询一楼是否含有点赞记录*/
+    public boolean readBlogAchieveLikeIsExist(UserInfo userInfo,String nickname,String bid,String cid);
+
+
+    /*查询一级评论是否低昂过赞*/
+    public List<String> readGetFirstLevelCommentThumbUpStatusList(UserInfo userInfo,List<CommentInfo> commentInfoList) throws UnknownHostException;
 
 }

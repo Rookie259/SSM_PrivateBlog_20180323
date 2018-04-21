@@ -13,19 +13,24 @@ import com.muxi.reids.ssm.tool.MD5.MD5_Password;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.DispatcherServlet;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/userController")
 @SessionAttributes("user")
 public class UserLRController {
-/*测试github更新代码上传*/
+    /*测试github更新代码上传*/
     @Autowired
     private ReadInformationServices readInformationServices;
 
@@ -56,7 +61,7 @@ public class UserLRController {
             map.put("loginState", "noExist");
         else {
             UserInfo userInfo1 = readInformationServices.readUserInfo(userInfo);
-            model.addAttribute("user",userInfo1);
+            model.addAttribute("user", userInfo1);
             map.put("loginState", "exist");
         }
         return map;
@@ -80,6 +85,12 @@ public class UserLRController {
         else
             map.put("nicknameState", "noExist");
         return map;
+    }
+
+    /*判断输入注册密码是否正确*/
+    @RequestMapping(value = "checkRegisterIsOk")
+    public String checkRegisterIsOk(ModelMap modelMap, String passText) {
+        return "redirect:/rs9780876";
     }
 
 
@@ -140,12 +151,4 @@ public class UserLRController {
         return map;
     }
 
-
-    public void setReadInformationServices(ReadInformationServices readInformationServices) {
-        this.readInformationServices = readInformationServices;
-    }
-
-    public void setAddInformationServices(AddInformationServices addInformationServices) {
-        this.addInformationServices = addInformationServices;
-    }
 }

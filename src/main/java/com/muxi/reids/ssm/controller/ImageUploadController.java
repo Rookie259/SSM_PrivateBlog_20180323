@@ -15,22 +15,24 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 /*测试  github更新   测试*/
 @Controller
 @RequestMapping("writeBlog")
-public class ImageUploadController {
+public class ImageUploadController extends DispatcherServlet {
 
     @Autowired
     private MultipartFileTranFile multipartFileTranFile;
 
-    @RequestMapping(value = "upload",method = RequestMethod.POST)
-    public void imageUpload(MultipartFile upload, HttpServletResponse response, HttpServletRequest request, ModelMap map){
+    @RequestMapping(value = "upload", method = RequestMethod.POST)
+    public void imageUpload(MultipartFile upload, HttpServletResponse response, HttpServletRequest request, ModelMap map) {
         File fileImage = multipartFileTranFile.multipartFileTranFile(upload);
         OSSClient ossClient = OSSTool.getOSSClient();
         String md5key = OSSTool.uploadObject2OSS(ossClient, fileImage, OSSObjectLiteral.Access_KEY_BUCKET_NAME, OSSObjectLiteral.FOLDER);
@@ -50,6 +52,7 @@ public class ImageUploadController {
             e.printStackTrace();
         }
     }
+
 
 
     public void setMultipartFileTranFile(MultipartFileTranFile multipartFileTranFile) {

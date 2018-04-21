@@ -50,6 +50,7 @@ public class EamilTool {
 
     /*发送验证吗*/
     public String sendCode(String eamil) {
+        /*获取随机数字*/
         String resultCode = achieveCode();
         HtmlEmail send = new HtmlEmail();
         try {
@@ -68,5 +69,4 @@ public class EamilTool {
         }
         return resultCode;
     }
-
 }

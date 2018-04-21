@@ -34,4 +34,15 @@ public interface AlterInformationServices {
     *   @Return:
     */
     public  void alterBlogLikeCount(Integer count,Integer bid);
+
+
+    /*
+    *   @Author: MuXi
+    *   @ClassName: AlterInformationServices
+    *   @param:  * @param null
+    *   @Date: 10:35 2018/4/21
+    *   @Description: 当前评论量加一
+    *   @Return: boolean
+    */
+    public boolean blogCommentCountPlusOne(BlogInfo blogInfo,String id);
 }

@@ -59,4 +59,10 @@
         insert into leavenote(lnname,lntext,lnaddress,lntime) values (
         #{lnname}, #{lntext}, #{lnaddress}, #{lntime} )
     </insert>
+    <!--添加一楼点赞记录-->
+    <insert id="addFirstFoolLike" keyColumn="lid" keyProperty="lid" useGeneratedKeys="true">
+        insert into likeblog(lip,lbid,lastate,lcid) values (
+        #{arg0},#{arg1},1,#{arg2}
+        )
+    </insert>
 </mapper>

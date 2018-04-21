@@ -125,7 +125,8 @@
             <artifactId>jedis</artifactId>
             <version>2.7.2</version>
         </dependency>
-        <!-- spring-redis实现 END-->
+        <!-- springCache-redis实现 END-->
+
 
         <!--springMVC-->
         <dependency>
@@ -273,7 +274,6 @@
             <artifactId>activation</artifactId>
             <version>1.1.1</version>
         </dependency>
-
         <!--QQ邮箱发送邮件 END-->
 
         <!--GeoIP获取地理位置-->

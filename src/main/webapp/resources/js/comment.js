@@ -3,15 +3,14 @@ var nowNIckName;
 $(document).ready(function () {
     $.ajax({
         type: "post",
-        url: "writeComment/InitializationUser.do",
+        url: "writeComment/InitializationUser",
         dataType: "json",
         success: function (msg) {
             if (msg.initializationUserInfo != null) {
                 $.each(msg, function (i, item) {
                     nowNIckName = item.uNickName;
                 })
-            }else if(msg.initializationUserInfo == null)
-            {
+            } else if (msg.initializationUserInfo == null) {
                 acieveNickname();
             }
         }
@@ -22,7 +21,7 @@ $(document).ready(function () {
 function acieveNickname() {
     $.ajax({
         type: "get",
-        url: "writeComment/achieveNickName.do",
+        url: "writeComment/achieveNickName",
         dataType: "json",
         success: function (msg) {
             nowNIckName = msg.nickname;
@@ -73,7 +72,7 @@ $('.commentAll').on('click', '.plBtn', function () {
         ' <a href="#" class="comment-size-name"> ' + nickname + ' : </a> ' +
         '<span class="my-pl-con">&nbsp;' + oSize + '</span> </div> ' +
         '<div class="date-dz"> <span class="date-dz-left pull-left comment-time">' + now + '</span>' +
-        ' <div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock">删除</a>' +
+        ' <div class="date-dz-right pull-right comment-pl-block">' +
         ' <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span>' +
         ' <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">0</i>)</a> </div> ' +
         '</div><div class="hf-list-con"></div></div> </div>';
@@ -195,18 +194,14 @@ $('.commentAll').on('click', '.removeBlock', function () {
         oT.remove();
     }
     $(this).parents('.date-dz-right').parents('.date-dz').parents('.comment-show-con-list').parents('.comment-show-con').remove();
-
 })
 
 /*点赞*/
-$('.comment-show').on('click', '.date-dz-z', function () {
-    var zNum = $(this).find('.z-num').html();
-    zNum++;
-    $(this).addClass('date-dz-z-click');
-    $(this).find('.z-num').html(zNum);
-    /*颜色变红*/
-    $(this).find('.date-dz-z-click-red').addClass('red');
-})
+/*$('.comment-show').on('click', '.date-dz-z', function () {
+
+})*/
+
+
 /*
     此插件textarea的高度是 height:100%; 继承父元素的高度 ==> 父元素只有一个 position:relative; 用于定位textarea
     页面中加载完毕又添加了pre标签，pre标签是以块元素存在的并且不可见，但是占用空间，
@@ -277,6 +272,7 @@ $('.comment-show').on('click', '.date-dz-z', function () {
 /*评论内容 与后台交互*/
 /*发表时*/
 $("#sendComment").click(function () {
+    id = $("#blog_id").val()
     data = {
         id: $("#blog_id").val(),
         nickname: nowNIckName,
@@ -284,11 +280,13 @@ $("#sendComment").click(function () {
     }
     $.ajax({
         type: "post",
-        url: "writeComment/sendZeroComment.do",
+        url: "writeComment/sendZeroComment",
         data: data,
         dataType: "json",
         success: function (msg) {
-
+            if (msg.addBaseComment == "success") {
+                $(".commentAll").load("writeComment/sendZeroComment" + {} + " .commentAll").fadeIn("slow")
+            }
         }
     })
 })
@@ -337,13 +335,64 @@ function writeDoubleDeck() {
     }
     $.ajax({
         type: "post",
-        url: "writeComment/doubleDeck.do",
+        url: "writeComment/doubleDeck",
         data: data,
         dataType: "json",
         success: function (msg) {
+            $('.comment-show').load("writeComment/doubleDeck" + '').fadeIn('slow');
         }
     })
 }
 
 
+function firstFloor(id) {
+    var id_arr = id.split('t');
+    var nowId = id_arr[1];
+    var blog_Id = $("#blog_id").val();
+    data = {
+        bid : blog_Id,
+        cid : nowId
+    }
+    $.ajax({
+          type : "post",
+          url : "writeComment/achieveFirstFloorLike",
+          data : data,
+          dataType:"json",
+          success : function (msg) {
+               if(msg.addFirstFloorLikeState == "exist"){
+                   alert("点赞失败  已点过赞")
+               }else {
+                   var zNum = $("#"+id).find('.z-num').html();
+                   zNum++;
+                   $("#"+id).addClass('date-dz-z-click');
+                   $("#"+id).find('.z-num').html(zNum);
+                   /*颜色变红*/
+                   $("#"+id).find('.date-dz-z-click-red').addClass('red');
+                   alert("点赞成功")
+               }
+          }
+    })
+}
 
+function douSta(id) {
+    var id_arr = id.split('a');
+    var nowId = id_arr[1];
+    var blog_Id = $("#blog_id").val();
+    $.ajax({
+        type : "post",
+        url : "writeComment/achieveFirstFloorLike",
+        data : data,
+        dataType:"json",
+        success : function (msg) {
+            if(msg.addFirstFloorLikeState == "exist"){
+            }else {
+                var zNum = $("#"+id).find('.z-num').html();
+                zNum++;
+                $("#"+id).addClass('date-dz-z-click');
+                $("#"+id).find('.z-num').html(zNum);
+                /*颜色变红*/
+                $("#"+id).find('.date-dz-z-click-red').addClass('red');
+            }
+        }
+    })
+}

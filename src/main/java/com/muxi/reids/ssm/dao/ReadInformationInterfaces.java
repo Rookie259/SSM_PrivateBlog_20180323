@@ -176,7 +176,7 @@ public interface ReadInformationInterfaces {
     *   @Description: 获取所有blog  按时间排序
     *   @Return: List<BlogInfo>
     */
-    public List<BlogInfo> readBlogAllTime();
+    public List<BlogInfo> readBlogAllTime(Integer begin,Integer end);
 
 
     /*
@@ -260,4 +260,47 @@ public interface ReadInformationInterfaces {
     *   @Return: List<BlogInfo>
     */
     public List<BlogInfo> readSixNewBlog();
+
+    /*
+    *   @Author: MuXi
+    *   @ClassName: ReadInformationInterfaces
+    *   @param:  * @param null
+    *   @Date: 9:55 2018/4/19
+    *   @Description: 查询评论是否存在点赞记录
+    *   @Return:List<likeblog>
+    */
+    public List<LikeInfo> readLikeInfoFirsetFloorIsExist(String lip,Integer lbid,Integer lcid);
+
+
+
+    /*
+    *   @Author: MuXi
+    *   @ClassName: ReadInformationInterfaces
+    *   @param:  * @param null
+    *   @Date: 15:04 2018/4/19
+    *   @Description: 通过id查询当前一级评论点赞人数
+    *   @Return:Integer
+    */
+    public Integer readNowUserCommentLikeCount(Integer lcid);
+
+    /*
+    *   @Author: MuXi
+    *   @ClassName: ReadInformationInterfaces
+    *   @param:  * @param null
+    *   @Date: 15:09 2018/4/19
+    *   @Description: 通过lcid查询comment
+    *   @Return: comment
+    */
+    public CommentInfo readCommentInfoByLike(Integer cid);
+
+
+    /*
+    *   @Author: MuXi
+    *   @ClassName: ReadInformationInterfaces
+    *   @param:  * @param null
+    *   @Date: 15:52 2018/4/19
+    *   @Description: 查询当前用户名是否点赞
+    *   @Return: comment
+    */
+    public LikeInfo readNowUserIsLikeComment(String nickname,Integer lcid);
 }

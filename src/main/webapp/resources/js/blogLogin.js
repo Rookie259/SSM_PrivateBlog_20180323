@@ -4,13 +4,14 @@
     if (accountEamil != "" && password != "") {
         $.ajax({
             type: "post",
-            url: "userController/userLogin.do",
+            url: "userController/userLogin",
             data: $("#loginForm").serialize(),
             dataType: "json",
             success: function (msg) {
+                var num = "564654654";
                 if (msg.loginState == "exist")
                 // window.location.href = "BlogHomePage.jsp";
-                    window.location.href = "writeBlog/achieveBlog.do";
+                window.location.href = "writeBlog/achieveBlog/"+num;
                 else if (msg.loginState == "noExist") {
                     $("#errorSpan").text("账号密码错误!请重新输入");
                     $("#errorSpan").css('display', 'block');
@@ -24,12 +25,12 @@
 })
 
 var count = 0;
-
 function checkRegister() {
     var question, solution;
     question = prompt("谁制作的本页面?");
-    if (question == "沐惜真NB" || question == "come on")
-        window.location.href = "rs9780876.do";
+    if (question == "沐惜真NB" || question == "come on") {
+        window.location.href = "userController/checkRegisterIsOk"
+    }
     else {
         switch ((parseInt(8 * Math.random())).toString()) {
             case "1" :

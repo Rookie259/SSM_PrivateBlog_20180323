@@ -9,7 +9,7 @@ $("#nickName").blur(function () {
     }
     $.ajax({
         type: "post",
-        url: "userController/userNicknameIsExist.do",
+        url: "userController/userNicknameIsExist",
         data: data,
         dataType: "json",
         success: function (msg) {
@@ -53,7 +53,7 @@ $("#userEamil").blur(function () {
         }
         $.ajax({
             type: "post",
-            url: "userController/userEamilIsExist.do",
+            url: "userController/userEamilIsExist",
             data: data,
             dataType: "json",
             success: function (msg) {
@@ -89,7 +89,7 @@ $("#achieveCode").click(function () {
         }
         $.ajax({
             type: "post",
-            url: "userController/userAchieveCode.do",
+            url: "userController/userAchieveCode",
             data: data,
             dataType: "json",
             success: function (msg) {
@@ -126,7 +126,7 @@ $("#register").click(function () {
     if (nickNameExit == false && passwordFit() == true && eamilExit == false && eamilCode != "") {
         $.ajax({
             type: "post",
-            url: "userController/userRegister.do",
+            url: "userController/userRegister",
             data: $("#registerForm").serialize(),
             dataType: "json",
             success: function (msg) {

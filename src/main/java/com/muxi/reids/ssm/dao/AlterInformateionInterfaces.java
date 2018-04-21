@@ -32,4 +32,25 @@ public interface AlterInformateionInterfaces {
     */
     public void alterBlogLikeCount(Integer blike,Integer bid);
 
+
+    /*
+    *   @Author: MuXi
+    *   @ClassName: AlterInformateionInterfaces
+    *   @param:  * @param null
+    *   @Date: 15:11 2018/4/19
+    *   @Description: 修改comment的点赞量
+    *   @Return: void
+    */
+    public void alterCommentLikeCount(Integer cid,Integer clike);
+
+
+    /*
+    *   @Author: MuXi
+    *   @ClassName: AlterInformateionInterfaces
+    *   @param:  * @param null
+    *   @Date: 10:36 2018/4/21
+    *   @Description: 当前博客评论量加一
+    *   @Return: void
+    */
+    public void nowBlogCommentPlusOne(Integer commentCount,Integer id);
 }

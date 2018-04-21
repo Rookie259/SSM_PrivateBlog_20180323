@@ -25,8 +25,8 @@ var cid = null;			//定时器ID
 var rid = null; 			//opacity减小函数ID
 var aid = null;			//opacity增大函数ID
 var start = 1;			//最大opacity
-var end = 0.5;			//最小opacity
-var delay = 100;			//延迟
+var end = 1;			//最小opacity
+var delay = 50;			//延迟
 
 function chImg() {
     //获取当前显示img
@@ -41,7 +41,7 @@ function chImg() {
 
 //opacity减小函数
 function reduce() {
-    start = 0.1;
+    start = 0.3;
     //start = (start * 10 - 1) / 10;
     console.log(start);
     if (start > end) {
@@ -57,7 +57,7 @@ function reduce() {
             next = 0;
         }
         img[next].style.display = "block";				//显示下个img
-        img[next].style.opacity = 0;					//初始透明0
+        img[next].style.opacity = 1;					//初始透明0
         start = 1;
         clearInterval(rid);							//清除减小opacity定时器
         rid = null;
@@ -67,8 +67,7 @@ function reduce() {
 
 //opacity增大函数
 function add() {
-    end = (end * 10 + 1) / 10;
-    // end = (Math.round(end*10))/10;
+    end = (Math.round(end*10))/10 + 0.4;
     console.log(end);
     if (end < start) {
         img[next].style.opacity = end;
@@ -81,21 +80,18 @@ function add() {
     }
 }
 
-cid = setInterval(chImg, 3500);	//图片定时更换
+cid = setInterval(chImg, 3000);	//图片定时更换
 
 /*获取全文内容*/
 function blogFullText(id) {
-    data = {
+    window.open("writeBlog/achieveFullText/"+id);
+   /* data = {
         bid: id
     }
-    $.ajax({
-        type: "get",
-        url: "writeBlog/achieveFullText.do",
-        data: data,
-        dataType: "json",
-        success: function (msg) {
-              if(msg.achieveState == "success")
-                  window.location.href = "bodet94192577.do";
-        }
-    })
+*/
+   /* $.ajax({
+        type: "post",
+        url: "writeBlog/achieveFullText/"+bid,
+        dataType: "json"
+    })*/
 }

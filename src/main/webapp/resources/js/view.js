@@ -9,7 +9,7 @@ $(".likename img").click(function () {
         }
         $.ajax({
             type: "post",
-            url: "writeComment/writeLike.do",
+            url: "writeComment/writeLike",
             data: data,
             dataType: "json",
             success: function (msg) {
@@ -28,19 +28,19 @@ $(".likename img").click(function () {
 
 /*点击推荐进入*/
 function recommend(id) {
-    data = {
+/*    data = {
         bid: id
     }
     $.ajax({
         type: "get",
-        url: "writeBlog/achieveFullText.do",
+        url: "writeBlog/achieveFullText",
         data: data,
         dataType: "json",
         success: function (msg) {
-            if (msg.achieveState == "success")
-                window.location.href = "bodet94192577.do";
-        }
-    })
+            if (msg.achieveState == "success")*/
+                window.location.href = "writeBlog/achieveFullText/"+id;
+/*        }
+    })*/
 }
 
 

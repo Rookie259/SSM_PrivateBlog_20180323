@@ -34,16 +34,17 @@
         <association property="bclid" column="bclid" javaType="ClassifyInfo" select="readClassifyById"></association>
     </resultMap>
     <!--Comment-->
-   <resultMap id="readComment" type="CommentInfo">
-       <id column="cid" property="cid"></id>
-       <result column="cnickname" property="cnickname"></result>
-       <result column="ctext" property="ctext"></result>
-       <result column="cnote" property="cnote"></result>
-       <result column="ctime" property="ctime"></result>
-       <result column="clike" property="clike"></result>
-       <association column="cbid" property="cbid"  javaType="BlogInfo" select="readBlogById"></association>
-       <association column="ctargetid" property="ctargetid" javaType="CommentInfo"  select="readCommentById"></association>
-   </resultMap>
+    <resultMap id="readComment" type="CommentInfo">
+        <id column="cid" property="cid"></id>
+        <result column="cnickname" property="cnickname"></result>
+        <result column="ctext" property="ctext"></result>
+        <result column="cnote" property="cnote"></result>
+        <result column="ctime" property="ctime"></result>
+        <result column="clike" property="clike"></result>
+        <association column="cbid" property="cbid" javaType="BlogInfo" select="readBlogById"></association>
+        <association column="ctargetid" property="ctargetid" javaType="CommentInfo"
+                     select="readCommentById"></association>
+    </resultMap>
 
     <!--用户账号密码是否匹配-->
     <select id="readUserIsExist" resultType="UserInfo">
@@ -76,7 +77,7 @@
     </select>
     <!--获取前十五条博客  按时间排序-->
     <select id="readFiftten" resultType="BlogInfo">
-              select *from blog where bstate = '发布状态' order by btime limit 15
+              select *from blog where bstate = '发布状态' order by btime desc limit 15
     </select>
     <!--通过id获取blog内容-->
     <select id="readBlogById" resultMap="readBlog">
@@ -92,12 +93,12 @@
     </select>
     <!--根据id查询是否存在数据  条件当前博客id-->
     <select id="readLikeInfoByBid" resultType="LikeInfo">
-          select *from likeblog where lip=#{arg0} and lbid=#{arg1}
+          select *from likeblog where lastate = 0 and lcid = 0 and lip=#{arg0} and lbid=#{arg1}
     </select>
     <!--根据id查询5条数据-->
     <select id="readBlogTopFive" parameterType="List" resultMap="readBlog">
         select *from blog where bid in
-        <foreach collection="list" item="item" open="(" close=")"  separator=",">
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
             #{item}
         </foreach>
     </select>
@@ -107,7 +108,7 @@
     </select>
     <!--获取所有blog 按时间排序-->
     <select id="readBlogAllTime" resultMap="readBlog">
-       SELECT  *from blog order by btime
+       SELECT  *from blog order by btime desc limit #{arg0},#{arg1}
     </select>
     <!--查询心情所有记录-->
     <select id="readEssayAll" resultType="EssayInfo">
@@ -145,5 +146,20 @@
     <select id="readSixNewBlog" resultType="BlogInfo">
        select *from blog order by btime desc
     </select>
-
+    <!--查询评论是否存在点赞记录-->
+    <select id="readLikeInfoFirsetFloorIsExist" resultType="LikeInfo">
+         select *from likeblog where lastate = 1 and  lip=#{arg0} and lbid = #{arg1} and lcid = #{arg2}
+    </select>
+   <!--通过lcid查询点怎人数 count-->
+    <select id="readNowUserCommentLikeCount" resultType="_int">
+        select count(*) from likeblog where lcid = #{lcid}
+    </select>
+    <!-- 通过lcid查询comment-->
+    <select id="readCommentInfoByLike" resultType="CommentInfo">
+        select * from comment where cid = #{cid};
+    </select>
+    <!---->
+    <select id="readNowUserIsLikeComment" resultType="LikeInfo">
+        select *from likeblog where lip = #{arg0} and lcid = #{arg1}
+    </select>
 </mapper>

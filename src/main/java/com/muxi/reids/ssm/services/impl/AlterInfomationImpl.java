@@ -14,26 +14,35 @@ import org.springframework.stereotype.Service;
 @Service("alterInformationServices")
 public class AlterInfomationImpl implements AlterInformationServices {
 
-   @Autowired
-   private AlterInformateionInterfaces alterInformateionInterfaces;
-
+    @Autowired
+    private AlterInformateionInterfaces alterInformateionInterfaces;
 
 
     public boolean alterBlogState(BlogInfo blogInfo) {
         try {
             alterInformateionInterfaces.alterBlogState(blogInfo);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
 
     public void alterBlogBpageview(Integer count, Integer bid) {
-        alterInformateionInterfaces.alterBlogBpageview(count,bid);
+        alterInformateionInterfaces.alterBlogBpageview(count, bid);
     }
 
     public void alterBlogLikeCount(Integer count, Integer bid) {
-        alterInformateionInterfaces.alterBlogLikeCount(count,bid);
+        alterInformateionInterfaces.alterBlogLikeCount(count, bid);
+    }
+
+    public boolean blogCommentCountPlusOne(BlogInfo blogInfo, String id) {
+        try {
+            alterInformateionInterfaces.nowBlogCommentPlusOne( new Integer(blogInfo.getBcommentcount() + 1),new Integer(id));
+            return true;
+        } catch (Exception e) {
+            return false;
+
+        }
     }
 
     public void setAlterInformateionInterfaces(AlterInformateionInterfaces alterInformateionInterfaces) {

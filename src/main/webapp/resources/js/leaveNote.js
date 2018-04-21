@@ -195,7 +195,9 @@ $("#textButton").click(function () {
     }
     $.ajax({
         type: "post",
-        url: "note/leaveNote.do",
+        url: "note/leaveNote",
+        async: false,
+        cache : false,
         data: data,
         dataType: "json",
         success: function (msg) {
@@ -231,6 +233,8 @@ $("#textButton").click(function () {
                     "                </div>\n" +
                     "            </div>");
                 $("#rl_exp_input").val("");
+                /*局部刷新页面*/
+            $('.messageContent').load("note/achieveAllNote" + ' .messageContent').fadeIn('slow');
 
         }
     })

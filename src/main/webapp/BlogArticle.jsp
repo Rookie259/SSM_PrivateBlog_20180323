@@ -7,9 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
 <html>
 <head>
-    <title>Title</title>
+    <title>博客</title>
+    <base href=" <%=basePath%>">
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png"/>
     <link rel="stylesheet" href="resources/css/reset.css">
     <link rel="stylesheet" href="resources/css/common.css">
@@ -25,13 +30,13 @@
 </div>
 <div class="nav">
     <ul>
-        <li class="first"><a href="writeBlog/achieveBlog.do">首页</a></li>
-        <li><a href="writeBlog/achieveAllBlog.do">博客</a></li>
-        <li><a href="hobby/addHobby.do">心情随笔</a></li>
-        <li><a href="ph94190877.do">过往云烟</a></li>
-        <li><a href="note/achieveAllNote.do">Blog留言</a></li>
-        <li><a href="me94000877.do">关于我</a></li>
-        <li><a href="ga94192577.do">休闲一刻</a></li>
+        <li class="first"><a href="writeBlog/achieveBlog">首页</a></li>
+        <li><a href="writeBlog/achieveAllBlog">博客</a></li>
+        <li><a href="hobby/readHobby">心情随笔</a></li>
+        <li><a href="ph94190877">过往云烟</a></li>
+        <li><a href="note/achieveAllNote">Blog留言</a></li>
+        <li><a href="BlogAbout.jsp">关于我</a></li>
+        <li><a href="BlogMatchPanic.jsp">休闲一刻</a></li>
     </ul>
 </div>
 <div class="main">
@@ -49,6 +54,7 @@
                         <h1>${top.btitle}</h1>
                     </div>
                     <div class="tag-article">
+
                         <c:forEach items="${listLabel}" var="label" varStatus="labelStatus" begin="${status.index}"
                                    end="${status.index}">
                             <c:forEach items="${label}" var="lb">
@@ -66,7 +72,8 @@
                     <p class="btn-danger" href="BlogContent.jsp" id="${top.bid}" onclick="blogFullText(this.id);">
                         阅读全文
                         <span class="badge">
-                            <c:forEach items="${maxCommentCount}" var="cc" begin="${status.index}" end="${status.index}">
+                            <c:forEach items="${maxCommentCount}" var="cc" begin="${status.index}"
+                                       end="${status.index}">
                                 ${cc}
                             </c:forEach>
     </span>
@@ -75,31 +82,14 @@
             </div>
         </c:forEach>
         <div class="clear"></div>
-        <div class="link-head more" style="margin-top: 55px">
-            <p><a href="#">加载更多</a></p>
+        <div class="link-head more" style="cursor:pointer;margin-top: 55px" id="moreArticle">
+            <p>加载更多</p>
         </div>
         <div class="footer" style="margin-left: -85px">
-            <p>Copyright © 2015 | <a href="si9780876.do">后台入口</a></p>
+            <p>Copyright © 2015 | <a href="si9780876">后台入口</a></p>
         </div>
     </div>
 </div>
-<script>
-    /*获取全文内容*/
-    function blogFullText(id) {
-        data = {
-            bid: id
-        }
-        $.ajax({
-            type: "get",
-            url: "writeBlog/achieveFullText.do",
-            data: data,
-            dataType: "json",
-            success: function (msg) {
-                if(msg.achieveState == "success")
-                    window.location.href = "BlogView.jsp";
-            }
-        })
-    }
-</script>
+<script src="resources/js/articleMoreBlog.js" charset="UTF-8"></script>
 </body>
 </html>

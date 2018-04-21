@@ -6,9 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <html>
 <head>
     <title>悬浮</title>
+    <base href=" <%=basePath%>">
     <link rel="stylesheet" href="resources/css/suspension.css">
     <script type="text/javascript" src="resources/js/tool/jquery-3.2.1.js" CHARSET="UTF-8"></script>
 </head>
@@ -19,7 +24,7 @@
 %>
 <div class="guide">
     <div class="guide-wrap">
-        <a href="writeBlog/achieveLabel.do" class="edit" title="发新帖"><span>发新帖</span></a>
+        <a href="writeBlog/achieveLabel" class="edit" title="发新帖"><span>发新帖</span></a>
         <a href="javascript:window.scrollTo(0,0)" class="top" title="回顶部"><span>回顶部</span></a>
     </div>
 </div>

@@ -177,8 +177,11 @@ $('.comment-show').on('click', '.hf-pl', function () {
                 ' <div class="date-dz-right pull-right comment-pl-block">' +
                 /* ' <a href="javascript:;" class="removeBlock">删除</a> ' +*/
                 '<a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> ' +
-                '<span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left">' +
-                '<i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a> </div> </div></div>';
+                '<span class="pull-left date-dz-line">|</span>  <a href="javascript:;" class="date-dz-z pull-left"\n' +
+                '                                                       id="assist${baseComment.cid}"\n' +
+                '                                                       onclick="firstFloor(this.id)"><i\n' +
+                '                                                            class="date-dz-z-click-red"></i>赞 (<i\n' +
+                '                                                            class="z-num">'+0+'</i>)</a> </div> </div></div>';
             oThis.parents('.hf-con').parents('.comment-show-con-list').find('.hf-list-con').css('display', 'block').prepend(oHtml) && oThis.parents('.hf-con').siblings('.date-dz-right').find('.pl-hf').addClass('hf-con-block') && oThis.parents('.hf-con').remove();
         });
     }
@@ -360,7 +363,6 @@ function firstFloor(id) {
           dataType:"json",
           success : function (msg) {
                if(msg.addFirstFloorLikeState == "exist"){
-                   alert("点赞失败  已点过赞")
                }else {
                    var zNum = $("#"+id).find('.z-num').html();
                    zNum++;
@@ -368,7 +370,6 @@ function firstFloor(id) {
                    $("#"+id).find('.z-num').html(zNum);
                    /*颜色变红*/
                    $("#"+id).find('.date-dz-z-click-red').addClass('red');
-                   alert("点赞成功")
                }
           }
     })

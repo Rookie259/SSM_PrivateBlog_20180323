@@ -40,6 +40,8 @@
                     <img src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/hobby/java.jpg" height='180px'
                          width='180px'>
                 </div>
+                <%--功能待定--%>
+                <a href="#"/>
                 <div class='hide'>
                     <h3>
                         技 术 论 帖
@@ -53,7 +55,7 @@
                     <img src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/hobby/blog.jpg" height='180px'
                          width='180px'>
                 </div>
-                <a href="BlogLeaveNote.jsp">
+                <a href="note/achieveAllNote">
                     <div class='hide'>
                         <h3>
                             Blog 留 言
@@ -68,7 +70,7 @@
                     <img src="http://rookieblog.oss-cn-beijing.aliyuncs.com/resources/hobby/%E9%98%BF%E4%B9%A0_%E9%98%BF%E4%B9%A0-%E8%BF%87%E5%BE%80%E4%BA%91%E7%83%9F%7Bvcd%7D.jpg"
                          height='180px' width='180px'>
                 </div>
-                <a href="BolgPhotos.jsp">
+                <a href="ph94190877">
                     <div class='hide'>
                         <h3>
                             过 往 云 烟

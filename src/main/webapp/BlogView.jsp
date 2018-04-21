@@ -172,7 +172,7 @@
                                                                onclick="achieveBaseCommentId(this.id)">回复</a>
                                                             <span class="pull-left date-dz-line">|</span>
                                                             <c:forEach items="${commentInfoListSecondLikeState}"
-                                                                       var="secondState" varStatus="secondStateStatus">
+                                                                       var="secondState" varStatus="secondStateStatus" begin="${douSta.index}" end="${douSta.index}">
                                                                 <c:choose>
                                                                     <c:when test="${secondState == \"exist\"}">
                                                                         <a href="javascript:;"

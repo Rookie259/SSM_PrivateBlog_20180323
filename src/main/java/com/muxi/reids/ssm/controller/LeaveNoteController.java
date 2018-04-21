@@ -123,7 +123,7 @@ public class LeaveNoteController  {
         if (blogInfo_2 != null) {
             modelMap.addAttribute("fullBlogText", blogInfo_2);
         }
-         return "redirect:/bodet94192577";
+         return "../BlogView";
     }
 
 

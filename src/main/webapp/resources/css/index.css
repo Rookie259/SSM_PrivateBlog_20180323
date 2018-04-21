@@ -61,7 +61,7 @@
  .article{
  	width: 90%;
  	margin: auto;
-	height: 200px;
+	height: auto;
 	padding: 19px;
 	position: relative;
 	top: 25px;
@@ -72,6 +72,11 @@
 	-moz-box-shadow: 0 0px 5px #c2c2c2;
 	box-shadow: 0 0px 5px #c2c2c2;
 	border: 1px dotted #ccc;
+	 overflow: hidden;
+	 border-bottom-left-radius:2%;
+	 border-bottom-right-radius:2%;
+	 border-top-left-radius:2%;
+	 border-top-right-radius:2%;
  }
 .article-logo{
 	background-color: #d9534f;
@@ -80,8 +85,6 @@
 	width: 70px;
 	border-radius: 40px;
 	position: absolute;
-	left: -20px;
-	top: -20px;
 	color: #fff;
 	padding-top: 10px;
  }

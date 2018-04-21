@@ -26,7 +26,7 @@
                 <div id="da-error-pin"></div>
                 <div id="da-error-code">
                     error <span>404</span></div>
-                <h1 class="da-error-heading"><a href="writeBlog/achieveBlog/564654654">哎哟喂！页面让狗狗叼走了!</a></h1>
+                <h1 class="da-error-heading"><a href="writeBlog/achieveBlog">哎哟喂！页面让狗狗叼走了!</a></h1>
             </div>
         </div>
     </div>

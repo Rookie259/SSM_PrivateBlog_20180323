@@ -50,7 +50,7 @@
     <!--拦截器END-->
     <!--配置500错误跳转页面-->
     <!-- 全局异常配置 -->
-<!--    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
             <props>
                 <prop key="java.lang.Exception">../../Blog500</prop>
@@ -62,11 +62,11 @@
                 <prop key="Blog500">500</prop>
             </props>
         </property>
-       &lt;!&ndash;默认错误页面，当找不到上面mappings中指定的异常对应视图时，使用本默认配置&ndash;&gt;
+       <!--默认错误页面，当找不到上面mappings中指定的异常对应视图时，使用本默认配置-->
         <property name="defaultErrorView" value="Blog500.jsp"></property>
-      &lt;!&ndash; 默认HTTP状态码&ndash;&gt;
+      <!-- 默认HTTP状态码-->
         <property name="defaultStatusCode" value="500"></property>
-    </bean>-->
+    </bean>
 
     <!--配置redis 和 spring cache-->
     <!--扫描redis配置文件-->

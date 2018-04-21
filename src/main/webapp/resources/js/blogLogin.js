@@ -10,8 +10,7 @@
             success: function (msg) {
                 var num = "564654654";
                 if (msg.loginState == "exist")
-                // window.location.href = "BlogHomePage.jsp";
-                window.location.href = "writeBlog/achieveBlog/"+num;
+                window.location.href = "writeBlog/achieveBlog";
                 else if (msg.loginState == "noExist") {
                     $("#errorSpan").text("账号密码错误!请重新输入");
                     $("#errorSpan").css('display', 'block');

@@ -143,19 +143,11 @@ public class WriteCommentController {
     @RequestMapping(value = "achieveFirstFloorLike", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> achieveFirstFloorLike(String bid, String cid, ModelMap modelMap, HttpSession session) {
-        /*游客名称*/
-        String nowIp = null;
-        try {
-            nowIp = inCommonUse.getIpAddress();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-        String nickname = "游客" + nowIp;
         Map<String, Object> map = new HashMap<String, Object>();
         /*查询是否存在点赞记录*/
         /*获取当前人的ip地址*/
         UserInfo userInfo = (UserInfo) session.getAttribute("user");
-        if (readInformationServices.readBlogAchieveLikeIsExist(userInfo, nickname, bid, cid))
+        if (readInformationServices.readBlogAchieveLikeIsExist(userInfo, bid, cid))
             map.put("addFirstFloorLikeState", "noExist");
         else
             map.put("addFirstFloorLikeState", "exist");

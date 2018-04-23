@@ -358,6 +358,7 @@ function firstFloor(id) {
           data : data,
           dataType:"json",
           success : function (msg) {
+              alert(msg.addFirstFloorLikeState)
                if(msg.addFirstFloorLikeState == "exist"){
                }else {
                    var zNum = $("#"+id).find('.z-num').html();
@@ -379,6 +380,7 @@ function douSta(id) {
         type : "post",
         url : "writeComment/achieveFirstFloorLike",
         data : data,
+        cache : true,
         dataType:"json",
         success : function (msg) {
             if(msg.addFirstFloorLikeState == "exist"){

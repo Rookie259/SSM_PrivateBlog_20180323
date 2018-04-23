@@ -32,7 +32,7 @@
 <!--菜单-->
 <jsp:include page="BlogLabel.jsp"></jsp:include>
 <div class="main">
-    <div style="padding:20px;margin:0 auto;width: 950px;height: auto;border-radius: 4px;background-color: #FFFFFF;word-wrap:break-word; word-break:break-all; ">
+    <div style="padding:20px;margin:0 auto;width: 900px;height: auto;border-radius: 4px;background-color: #FFFFFF;word-wrap:break-word; word-break:break-all; ">
         <div class="breadcrumb"></div>
         <p class="title">${fullBlogText.btitle}</p>
         <div class="nature" style="margin-top: 25px">
@@ -99,7 +99,7 @@
                 <!--回复区域 begin-->
                 <div class="comment-show" id="commentAjax">
                     <!--评论div-->
-                    <c:forEach items="${baseComment}" var="baseComment">
+                    <c:forEach items="${baseComment}" var="baseComment" varStatus="baseCommentStatus">
                         <input type="text" id="hideid${baseComment.cid}" value="${baseComment.cid}"
                                style="display: none">
                         <div class="comment-show-con clearfix">

@@ -118,8 +118,8 @@ public class ReadInformationImpl implements ReadInformationServices {
         return list_all;
     }
 
-    public List readAllBlogTime(String begin,String end) {
-        List<BlogInfo> list = readInformationInterfaces.readBlogAllTime(new Integer(begin),new Integer(end));
+    public List readAllBlogTime(String begin, String end) {
+        List<BlogInfo> list = readInformationInterfaces.readBlogAllTime(new Integer(begin), new Integer(end));
         List<SunDate> list_date = new ArrayList<SunDate>();
         List<List<String>> list_label = new ArrayList<List<String>>();
         for (int i = 0; i < list.size(); i++) {
@@ -237,8 +237,6 @@ public class ReadInformationImpl implements ReadInformationServices {
                 lists_result.add(null);
             }
         }
-
-
         for (List<CommentInfo> cl :
                 lists_result) {
             if (cl != null) {
@@ -250,8 +248,6 @@ public class ReadInformationImpl implements ReadInformationServices {
 
         }
         return lists_result;*/
-
-
         return list;
     }
 
@@ -286,11 +282,23 @@ public class ReadInformationImpl implements ReadInformationServices {
         return readInformationInterfaces.readSixNewBlog();
     }
 
-    public boolean readBlogAchieveLikeIsExist(UserInfo userInfo, String nickname, String bid, String cid) {
+    public boolean readBlogAchieveLikeIsExist(UserInfo userInfo, String bid, String cid) {
+        /*游客名称*/
+        String nowIp = null;
+        try {
+            nowIp = inCommonUse.getIpAddress();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        String nickname = "游客" + nowIp;
+        List<LikeInfo> commentInfoList = new ArrayList<LikeInfo>();
+        if (null != userInfo)
+            commentInfoList = readInformationInterfaces.readLikeInfoFirsetFloorIsExist(userInfo.getuNickName(), new Integer(bid), new Integer(cid));
+        else
+            commentInfoList = readInformationInterfaces.readLikeInfoFirsetFloorIsExist(nickname, new Integer(bid), new Integer(cid));
         /*查询是否存在点赞记录*/
-        List<LikeInfo> commentInfoList = readInformationInterfaces.readLikeInfoFirsetFloorIsExist(nickname, new Integer(bid), new Integer(cid));
         if (commentInfoList.size() == 0) {
-            if (userInfo == null) {
+            if (null == userInfo) {
                 /*插入点赞记录*/
                 addInformationInterfaces.addFirstFoolLike(nickname, new Integer(bid), new Integer(cid));
                 /*查询贡献赞人数*/
@@ -304,6 +312,14 @@ public class ReadInformationImpl implements ReadInformationServices {
                 return true;
             } else {
                 addInformationInterfaces.addFirstFoolLike(userInfo.getuNickName(), new Integer(bid), new Integer(cid));
+                /*查询贡献赞人数*/
+                Integer countLike = readInformationInterfaces.readNowUserCommentLikeCount(new Integer(cid));
+                /*修改comment  like属性*/
+                /*查询comment对象*/
+                CommentInfo commentInfo = readInformationInterfaces.readCommentInfoByLike(new Integer(cid));
+                commentInfo.setClike(countLike);
+                /*修改评论的点赞数量*/
+                alterInformateionInterfaces.alterCommentLikeCount(new Integer(countLike), new Integer(cid));
                 return true;
             }
         } else {
@@ -313,7 +329,7 @@ public class ReadInformationImpl implements ReadInformationServices {
 
     public List<String> readGetFirstLevelCommentThumbUpStatusList(UserInfo userInfo, List<CommentInfo> commentInfoList) throws UnknownHostException {
         List<String> stringList = new ArrayList<String>();
-        if (userInfo != null) {
+        if (null != userInfo) {
             for (CommentInfo commentInfo :
                     commentInfoList) {
                 if (readInformationInterfaces.readNowUserIsLikeComment(userInfo.getuNickName(), commentInfo.getCid()) != null) {
@@ -326,7 +342,7 @@ public class ReadInformationImpl implements ReadInformationServices {
             String nickname = "游客" + inCommonUse.getIpAddress();
             for (CommentInfo commentInfo :
                     commentInfoList) {
-                if (readInformationInterfaces.readNowUserIsLikeComment(nickname, commentInfo.getCid()) != null) {
+                if (null != readInformationInterfaces.readNowUserIsLikeComment(nickname, commentInfo.getCid())) {
                     stringList.add("exist");
                 } else {
                     stringList.add("noExist");

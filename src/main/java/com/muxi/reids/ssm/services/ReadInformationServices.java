@@ -217,7 +217,7 @@ public interface ReadInformationServices {
 
 
     /*查询一楼是否含有点赞记录*/
-    public boolean readBlogAchieveLikeIsExist(UserInfo userInfo,String nickname,String bid,String cid);
+    public boolean readBlogAchieveLikeIsExist(UserInfo userInfo,String bid,String cid);
 
 
     /*查询一级评论是否低昂过赞*/

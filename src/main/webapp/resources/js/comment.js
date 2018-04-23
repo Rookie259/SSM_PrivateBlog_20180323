@@ -287,9 +287,6 @@ $("#sendComment").click(function () {
         data: data,
         dataType: "json",
         success: function (msg) {
-            if (msg.addBaseComment == "success") {
-                $(".commentAll").load("writeComment/sendZeroComment" + {} + " .commentAll").fadeIn("slow")
-            }
         }
     })
 })
@@ -342,7 +339,6 @@ function writeDoubleDeck() {
         data: data,
         dataType: "json",
         success: function (msg) {
-            $('.comment-show').load("writeComment/doubleDeck" + '').fadeIn('slow');
         }
     })
 }

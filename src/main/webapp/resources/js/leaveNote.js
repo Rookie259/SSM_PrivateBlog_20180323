@@ -234,7 +234,6 @@ $("#textButton").click(function () {
                     "            </div>");
                 $("#rl_exp_input").val("");
                 /*局部刷新页面*/
-            $('.messageContent').load("note/achieveAllNote" + ' .messageContent').fadeIn('slow');
 
         }
     })

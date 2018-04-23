@@ -163,7 +163,6 @@ $("#textButton").click(function () {
                     "                </li><div style='margin-top: 7px;background: #FFFFFF'></div>")
 
                 $("#rl_exp_input").val("")
-                $('.myUl').load("hobby/addHobby" + ' .myUl').fadeIn('slow');
             }
         }
     })

@@ -13,12 +13,10 @@ import com.muxi.reids.ssm.entity.CommentInfo;
 import com.muxi.reids.ssm.entity.LeaveNoteInfo;
 import com.muxi.reids.ssm.entity.UserInfo;
 import com.muxi.reids.ssm.services.AddInformationServices;
-import com.muxi.reids.ssm.tool.Eamil.EamilTool;
 import com.muxi.reids.ssm.tool.commonTools.InCommonUse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.net.UnknownHostException;
 
 @Service("addInformationServices")
@@ -86,10 +84,6 @@ public class AddInforamteionImpl implements AddInformationServices {
                     break;
                 }
             }
-            System.out.println(reply);
-            System.out.println(text);
-            System.out.println(id);
-            System.out.println(baseCommentId);
             commentInfo.setCnickname(nowAddress);
             commentInfo.setCtext(text);
             commentInfo.setCtime(inCommonUse.achieveNowTime());
@@ -99,9 +93,6 @@ public class AddInforamteionImpl implements AddInformationServices {
             commentInfo.setCtargetid(commentInfo1);
             commentInfo.setCnote("1");
             commentInfo.setCcheckcomment(new Integer(baseCommentId));
-            System.out.println("-------------------------------------------");
-            System.out.println(commentInfo.toString());
-            System.out.println("-------------------------------------------");
             addInformationInterfaces.addDoubleDeckComment(commentInfo);
         } catch (UnknownHostException e) {
             e.printStackTrace();

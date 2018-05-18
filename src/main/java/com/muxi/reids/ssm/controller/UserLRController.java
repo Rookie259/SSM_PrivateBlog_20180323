@@ -90,7 +90,8 @@ public class UserLRController {
     /*判断输入注册密码是否正确*/
     @RequestMapping(value = "checkRegisterIsOk")
     public String checkRegisterIsOk(ModelMap modelMap, String passText) {
-        return "redirect:/rs9780876";
+
+      return "";
     }
 
 
@@ -141,8 +142,10 @@ public class UserLRController {
      */
     @RequestMapping(value = "/userRegister")
     @ResponseBody
-    public Map<String, Object> userRegister(Model model, UserInfo userInfo) {
+    public Map<String, Object> userRegister(Model model, UserInfo userInfo) throws NoSuchAlgorithmException {
         Map<String, Object> map = new HashMap<String, Object>();
+        String pwd = userInfo.getuPassword();
+        userInfo.setuPassword(new MD5_Password().getMD5(pwd));
         userInfo.setuTime(eamilTool.achieveNowTime());
         if (addInformationServices.addUserInfo(userInfo))
             map.put("registerState", "registerSuccess");

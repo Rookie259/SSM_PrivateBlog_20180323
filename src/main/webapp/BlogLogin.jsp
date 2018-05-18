@@ -60,7 +60,7 @@
                     <img src="resources/images/weixin.png" style="height: 45px; width: 45px">
                 </div>
                 <div class="registerBox">
-                    <div class="register">没有账号?<a href="#" onclick="checkRegister();">注册?</a></div>
+                    <div class="register">没有账号?<button onclick="checkRegister();" style="border: none;background: #FFFFFF;outline: none;cursor: pointer">注册?</button></div>
                 </div>
             </div>
         </div>

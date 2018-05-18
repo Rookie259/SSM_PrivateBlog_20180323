@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@SessionAttributes({"commentInfoListSecondLikeState", "list_FirstLikeState", "label", "classify", "blogPreview", "blogLable", "topBlog", "dateBlog", "listLabel", "fullBlogText", "likeState", "recommendBlog", "baseComment", "doubleComment", "maxCommentCount"})
+@SessionAttributes({"commentInfoListSecondLikeState", "list_FirstLikeState", "label", "classify", "blogPreview", "blogLable", "topBlog", "dateBlog", "listLabel", "fullBlogText", "likeState", "recommendBlog", "baseComment", "doubleComment", "maxCommentCount","newSixBlog"})
 @RequestMapping(value = "writeBlog")
 public class WriteBlogControll {
 
@@ -107,6 +107,9 @@ public class WriteBlogControll {
         List<List<String>> list_label = (List<List<String>>) blog.get(2);
         /*评论量*/
         List<Integer> integerList = readInformationServices.readBlogByIdCommentMaxCount(topBlog);
+        /*获取最新的六片文章*/
+        List<BlogInfo> blogInfos = readInformationServices.readSixNewBlog();
+        map.addAttribute("newSixBlog",blogInfos);
         map.addAttribute("topBlog", topBlog);
         map.addAttribute("maxCommentCount", integerList);
         map.addAttribute("dateBlog", dateBlog);
@@ -128,20 +131,17 @@ public class WriteBlogControll {
         /*获取根评论*/
         List<CommentInfo> commentInfo_list = readInformationServices.readBaseComment(bid);
         /*获取当前用户对当前评论点赞状态*/
-        List<String> list_FirstLikeState = readInformationServices.readGetFirstLevelCommentThumbUpStatusList((UserInfo) session.getAttribute("user"), commentInfo_list);
-        /*楼中楼待定*/
-        //TODO
-        /*目前只获取楼中楼一楼*/
-        /*---------------------------------------------------*/
+        List<String> list_FirstLikeState = readInformationServices.readGetFirstLevelCommentThumbUpStatusList((UserInfo) session.getAttribute("user"),
+                commentInfo_list);
         //获取ctargetid不为0的评论
         List<CommentInfo> list_ctargetid_noid = readInformationServices.readCommentInfoctargetidNoZero(new Integer(bid));
-        List<String> commentInfoListSecondLikeState = readInformationServices.readGetFirstLevelCommentThumbUpStatusList((UserInfo) session.getAttribute("user"), list_ctargetid_noid);
+        List<String> commentInfoListSecondLikeState = readInformationServices.readGetFirstLevelCommentThumbUpStatusList((UserInfo) session.getAttribute("user"),
+                list_ctargetid_noid);
         /*根评论存入session*/
         modelMap.addAttribute("baseComment", commentInfo_list);
         modelMap.addAttribute("commentInfoListSecondLikeState", commentInfoListSecondLikeState);
         modelMap.addAttribute("doubleComment", list_ctargetid_noid);
         modelMap.addAttribute("list_FirstLikeState", list_FirstLikeState);
-        /*---------------------------------------------------*/
         //查询当前用户对当前博客是否点赞  返回状态
         try {
             String ip = inCommonUse.getIpAddress();

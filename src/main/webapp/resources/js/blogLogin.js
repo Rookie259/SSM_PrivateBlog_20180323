@@ -10,7 +10,7 @@
             success: function (msg) {
                 var num = "564654654";
                 if (msg.loginState == "exist")
-                window.location.href = "writeBlog/achieveBlog";
+                    window.location.href = "writeBlog/achieveBlog";
                 else if (msg.loginState == "noExist") {
                     $("#errorSpan").text("账号密码错误!请重新输入");
                     $("#errorSpan").css('display', 'block');
@@ -24,11 +24,13 @@
 })
 
 var count = 0;
+
 function checkRegister() {
     var question, solution;
+    var question, solution;
     question = prompt("谁制作的本页面?");
-    if (question == "沐惜真NB" || question == "come on") {
-        window.location.href = "userController/checkRegisterIsOk"
+    if (question == "沐惜真帅" || question == "admin") {
+       window.location.href = "BlogRegister.jsp"
     }
     else {
         switch ((parseInt(8 * Math.random())).toString()) {
@@ -57,5 +59,6 @@ function checkRegister() {
                 alert("啦啦啦 啦啦啦 我是卖bug的小行家")
                 break;
         }
+        return false;
     }
 }

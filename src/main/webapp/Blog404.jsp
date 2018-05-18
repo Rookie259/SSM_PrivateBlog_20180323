@@ -12,7 +12,7 @@
 %>
 <html>
 <head>
-    <title>页面让狗调走啦</title>
+    <title>姑娘，别走!</title>
     <base href=" <%=basePath%>">
     <link rel="stylesheet" type="text/css" href="resources/css/dandelion.css" media="screen"/>
     <script type="text/javascript" src="resources/js/tool/jquery-3.2.1.js"></script>
@@ -26,7 +26,7 @@
                 <div id="da-error-pin"></div>
                 <div id="da-error-code">
                     error <span>404</span></div>
-                <h1 class="da-error-heading"><a href="writeBlog/achieveBlog">哎哟喂！页面让狗狗叼走了!</a></h1>
+                <h1 class="da-error-heading"><a href="writeBlog/achieveBlog">姑娘，别走!</a></h1>
             </div>
         </div>
     </div>
